@@ -11,12 +11,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          ref: main
 
-      - name: Install modules
-        run: yarn install --immutable --immutable-cache --check-cache
+      - name: Setup Node.js and pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
 
-      - name: Build application
-        run: yarn build
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build code
+        run: pnpm build
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
