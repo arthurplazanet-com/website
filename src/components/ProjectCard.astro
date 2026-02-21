@@ -1,0 +1,25 @@
+---
+import type { Project } from '../types/index.ts'
+import Card from './Card.astro'
+const props = Astro.props
+const project = props.project as Project
+
+const tags = project.tags || []
+const links = project.links || []
+
+---
+
+	<Card>
+				<h2>{project.name}</h2>
+				<p>{project.description.content}</p>
+				<ul>
+					{tags.length > 0 && tags.map((tag) => <li>{tag}</li>)}
+				</ul>
+				<ul>
+					{links.length > 0 && links.map((link) => (
+						<li>
+							<a href={link.url}>{link.label}</a>
+						</li>
+					))}
+				</ul>
+			</Card>
