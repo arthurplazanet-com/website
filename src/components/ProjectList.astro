@@ -1,15 +1,13 @@
 ---
-import type { Project } from '../types/index.ts'
-import Layout from '../layouts/Layout.astro';
-import { YFlow } from '@use-compose/ui';
-import Card from './Card.astro';
-import ProjectCard from './ProjectCard.astro';
-const props = Astro.props
-const projects = props.projects as Project[]
+import type { Project } from "../types/index.ts";
+import Layout from "../layouts/Layout.astro";
+import { YFlow } from "@use-compose/ui";
+import Card from "./Card.astro";
+import ProjectCard from "./ProjectCard.astro";
+const props = Astro.props;
+const projects = props.projects as Project[];
 ---
 
 <ul>
-		{projects.map((project) => (
-		<ProjectCard  project={project} />
-		))}
-	</ul>
+  {projects.map((project) => <ProjectCard project={project} />)}
+</ul>

@@ -1,10 +1,40 @@
-name: Deploy Website
+name: ci
 
 on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - dev
   workflow_dispatch:
 
 jobs:
+  lint_format:
+    if: ${{ ! startsWith(github.event.pull_request.head.ref, 'renovate/') }}
+    name: Lint, Format and build - Node version 22
+    uses: ./.github/workflows/lint_format.yml
+    with:
+      node_version: 22
+
+  test:
+    if: ${{ ! startsWith(github.event.pull_request.head.ref, 'renovate/') }}
+    name: Run Tests with Node version 22
+    uses: ./.github/workflows/test.yml
+    with:
+      node_version: 22
+
+  build:
+    if: ${{ ! startsWith(github.event.pull_request.head.ref, 'renovate/') }}
+    uses: ./.github/workflows/build.yml
+    with:
+      node_version: 22
+      # SSH_KEY: ${{ secrets.SSH_KEY }}
+
   deploy:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    needs: build
     runs-on: ubuntu-latest
     env:
       PUBLIC_API_URL: https://api.arthurplazanet.com
