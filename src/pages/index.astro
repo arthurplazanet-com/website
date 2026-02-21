@@ -1,8 +1,8 @@
 ---
-import type { Project } from '../types/index.ts'
-import Layout from '../layouts/Layout.astro';
 import { YFlow } from '@use-compose/ui';
 import ProjectList from '../components/ProjectList.astro';
+import Layout from '../layouts/Layout.astro';
+import type { Project } from '../types/index.ts';
 
 const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/content/projects`)
 console.log('📟 - response → ', response)
@@ -11,9 +11,10 @@ console.log('📟 - data → ', data)
 const projects: Project[] = Array.isArray(data) ? data : []
 console.log('📟 - projects → ', projects)
 const hasProjects = projects && projects.length > 0
+console.log('📟 - hasProjects → ', hasProjects)
 ---
 
-{!hasProjects && (
+{!hasProjects && console.log('fgdfgdf') && (
 	<Layout>
 		<YFlow>
 			<p>No projects found.</p>
@@ -22,8 +23,9 @@ const hasProjects = projects && projects.length > 0
 ) }
 
 <Layout>
-	<YFlow>
+	<!-- <YFlow> -->
+		<!-- <h1>Projects</h1> -->
 		<ProjectList projects={projects} />
 	
-	</YFlow>
+	<!-- </YFlow> -->
 </Layout>
