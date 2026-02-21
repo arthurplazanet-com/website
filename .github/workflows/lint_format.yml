@@ -1,0 +1,64 @@
+name: Lint & Format
+
+on:
+  workflow_call:
+    inputs:
+      node_version:
+        required: true
+        type: number
+        default: 22
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        uses: ./.github/actions/install-dependencies
+        with:
+          node_version: ${{ inputs.node_version }}
+          pnpm_version: 9
+          cache: 'pnpm'
+
+      - name: Lint
+        run: pnpm lint
+
+  lint_style:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        uses: ./.github/actions/install-dependencies
+        with:
+          node_version: ${{ inputs.node_version }}
+          pnpm_version: 9
+          cache: 'pnpm'
+
+      - name: Lint Style
+        run: pnpm lint:style
+
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        uses: ./.github/actions/install-dependencies
+        with:
+          node_version: ${{ inputs.node_version }}
+          pnpm_version: 9
+          cache: 'pnpm'
+
+      - name: Format
+        run: pnpm format
