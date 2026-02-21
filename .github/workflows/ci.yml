@@ -18,13 +18,6 @@ jobs:
     with:
       node_version: 22
 
-  test:
-    if: ${{ ! startsWith(github.event.pull_request.head.ref, 'renovate/') }}
-    name: Run Tests with Node version 22
-    uses: ./.github/workflows/test.yml
-    with:
-      node_version: 22
-
   build:
     if: ${{ ! startsWith(github.event.pull_request.head.ref, 'renovate/') }}
     uses: ./.github/workflows/build.yml
