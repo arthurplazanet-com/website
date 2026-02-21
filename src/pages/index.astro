@@ -1,11 +1,28 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import type { Project } from '../types/index.ts'
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/content/projects`)
+const projects: Project[] = await response.json()
 ---
 
 <Layout>
-	<Welcome />
+	<ul>
+		{projects.map((project) => (
+			<li>
+				<h2>{project.name}</h2>
+				<p>{project.description.content}</p>
+				<ul>
+					{project.tags.map((tag) => <li>{tag}</li>)}
+				</ul>
+				<ul>
+					{project.links.map((link) => (
+						<li>
+							<a href={link.url}>{link.label}</a>
+						</li>
+					))}
+				</ul>
+			</li>
+		))}
+	</ul>
 </Layout>
