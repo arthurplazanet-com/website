@@ -1,3 +1,7 @@
+---
+import DownloadPdf from '../components/DownloadPdf.astro'
+import Header from '../components/Header.astro'
+---
 <!doctype html>
 <html lang="en">
 	<head>
@@ -8,6 +12,9 @@
 		<title>Astro Basics</title>
 	</head>
 	<body>
+		<Header>
+			<DownloadPdf />
+		</Header>
 		<slot />
 	</body>
 </html>
