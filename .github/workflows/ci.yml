@@ -10,6 +10,9 @@ on:
       - dev
   workflow_dispatch:
 
+env:
+  PUBLIC_API_URL: https://api.arthurplazanet.com
+
 jobs:
   lint_format:
     if: ${{ ! startsWith(github.event.pull_request.head.ref, 'renovate/') }}
@@ -23,6 +26,8 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       node_version: 22
+      PUBLIC_API_URL: ${{ github.event.inputs.PUBLIC_API_URL }}
+
       # SSH_KEY: ${{ secrets.SSH_KEY }}
 
   deploy:
@@ -30,7 +35,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     env:
-      PUBLIC_API_URL: https://api.arthurplazanet.com
+      PUBLIC_API_URL: ${{ github.event.inputs.PUBLIC_API_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5

@@ -7,6 +7,10 @@ on:
         required: true
         type: number
         default: 22
+      PUBLIC_API_URL:
+        required: true
+        type: string
+        default: https://api.arthurplazanet.com
 
 jobs:
   build-playground:
