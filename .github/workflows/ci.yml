@@ -38,7 +38,7 @@ jobs:
       PUBLIC_API_URL: ${{ github.event.inputs.PUBLIC_API_URL }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: main
 

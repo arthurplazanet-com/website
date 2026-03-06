@@ -10,7 +10,7 @@ jobs:
       PUBLIC_API_URL: https://api.arthurplazanet.com
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: main
 
