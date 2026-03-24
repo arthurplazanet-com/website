@@ -1,0 +1,16 @@
+---
+import type { Project } from "../..//types/index.ts";
+import Card from "../../components/ui/Card.astro";
+const props = Astro.props;
+const project = props.project as Project;
+
+const tags = project.tags || [];
+const links = project.links || [];
+---
+
+<Card
+  title={project.name}
+  description={project.description}
+  tags={tags}
+  links={links}
+/>
