@@ -1,20 +1,20 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import vue from '@astrojs/vue';
+import vue from "@astrojs/vue";
 
-// https://astro.build/config 
+// https://astro.build/config
 export default defineConfig({
   integrations: [vue()],
 
-   vite: {
+  vite: {
     // publicDir: 'public',
     build: {
       rollupOptions: {
-        external: ['@use-compose/ui', '@use-compose/ui/dist/*'],
+        external: ["@use-compose/ui", "@use-compose/ui/dist/*"],
         output: {
           globals: {
-            vue: 'Vue',
+            vue: "Vue",
           },
         },
         // external: ['@use-compose/ui', '@use-compose/ui/style.css'],
@@ -22,4 +22,5 @@ export default defineConfig({
         // noExternal: [/\.css$/],
       },
     },
+  },
 });

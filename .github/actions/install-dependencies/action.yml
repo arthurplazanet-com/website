@@ -1,20 +1,20 @@
 name: Install Dependencies
-description: 'Install Node.js and pnpm, and install dependencies using pnpm'
+description: "Install Node.js and pnpm, and install dependencies using pnpm"
 inputs:
   node_version:
-    description: 'Node.js version to use'
+    description: "Node.js version to use"
     required: true
-    default: '22'
+    default: "22"
   pnpm_version:
-    description: 'pnpm version to use'
+    description: "pnpm version to use"
     required: true
-    default: '9'
+    default: "9"
   cache:
-    description: 'Cache strategy for dependencies'
+    description: "Cache strategy for dependencies"
     required: false
-    default: 'pnpm'
+    default: "pnpm"
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Setup Node.js and pnpm
       uses: pnpm/action-setup@v4

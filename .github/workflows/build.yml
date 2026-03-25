@@ -1,4 +1,4 @@
-name: Build Playground and Docs
+name: Build
 
 on:
   workflow_call:
@@ -7,6 +7,10 @@ on:
         required: true
         type: number
         default: 22
+      PUBLIC_API_URL:
+        required: true
+        type: string
+        default: https://api.arthurplazanet.com
 
 jobs:
   build-playground:
@@ -22,7 +26,7 @@ jobs:
         uses: ./.github/actions/install-dependencies
         with:
           node_version: ${{ inputs.node_version }}
-          pnpm_version: 9
+          pnpm_version: 10
           cache: "pnpm"
 
       - name: Sync types
