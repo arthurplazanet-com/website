@@ -32,6 +32,9 @@ jobs:
       - name: Sync types
         run: node scripts/sync-types.mjs
 
+      - name: Create .env
+        run: cp .env.ci .env
+
       - name: Build code
         run: pnpm build
 
