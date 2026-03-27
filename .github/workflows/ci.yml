@@ -26,7 +26,7 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       node_version: 22
-      PUBLIC_API_URL: ${{ github.event.inputs.PUBLIC_API_URL }}
+      PUBLIC_API_URL: ${{ github.env.PUBLIC_API_URL }}
 
       # SSH_KEY: ${{ secrets.SSH_KEY }}
 
@@ -38,7 +38,7 @@ jobs:
       PUBLIC_API_URL: ${{ github.event.inputs.PUBLIC_API_URL }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           ref: main
 
