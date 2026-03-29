@@ -16,20 +16,14 @@ const hasProjects = projects && projects.length > 0;
 console.log("📟 - hasProjects → ", hasProjects);
 ---
 
-{
-  !hasProjects && (
-    <Layout>
-      <YFlow>
+<Layout>
+  {
+    !hasProjects ? (
+      <YFlow client:only="vue">
         <p>No projects found.</p>
       </YFlow>
-    </Layout>
-  )
-}
-
-<Layout>
-  <!-- <YFlow> -->
-  <!-- <h1>Projects</h1> -->
-  <ProjectList projects={projects} />
-
-  <!-- </YFlow> -->
+    ) : (
+      <ProjectList projects={projects} />
+    )
+  }
 </Layout>
