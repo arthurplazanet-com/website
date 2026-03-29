@@ -26,7 +26,7 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       node_version: 22
-      PUBLIC_API_URL: ${{ github.event.inputs.PUBLIC_API_URL }}
+      PUBLIC_API_URL: ${{ env.PUBLIC_API_URL }}
 
       # SSH_KEY: ${{ secrets.SSH_KEY }}
 
@@ -34,27 +34,12 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     needs: build
     runs-on: ubuntu-latest
-    env:
-      PUBLIC_API_URL: ${{ github.event.inputs.PUBLIC_API_URL }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
         with:
-          ref: main
-
-      - name: Setup Node.js and pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Sync types
-        run: node scripts/sync-types.mjs
-
-      - name: Build code
-        run: pnpm build
+          name: website-build
+          path: ./dist/
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
