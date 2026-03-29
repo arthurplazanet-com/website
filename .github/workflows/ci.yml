@@ -26,7 +26,7 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       node_version: 22
-      PUBLIC_API_URL: ${{ env.PUBLIC_API_URL }}
+      PUBLIC_API_URL: ${{ vars.PUBLIC_API_URL }}
 
       # SSH_KEY: ${{ secrets.SSH_KEY }}
 
