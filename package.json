@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@astrojs/vue": "^5.1.4",
-    "@use-compose/ui": "0.6.0",
+    "@use-compose/ui": "0.7.0",
     "astro": "^5.4.1",
     "vue": "^3.5.28"
   },
