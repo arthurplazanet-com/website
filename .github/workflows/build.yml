@@ -33,10 +33,13 @@ jobs:
         run: node scripts/sync-types.mjs
 
       - name: Create .env
-        run: cp .env.ci .env
+        run: |
+          touch.env
+          cp .env.ci .env
+          cat .env
 
       - name: Build code
-        run: pnpm build
+        run: PUBLIC_API_URL=$ {{env.PUBLIC_API_URL}} pnpm build
 
       - name: Upload-artifact if will deploy
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
