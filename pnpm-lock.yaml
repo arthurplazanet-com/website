@@ -12,8 +12,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.1(astro@5.18.1(rollup@4.59.0)(typescript@5.9.3))(vue@3.5.30(typescript@5.9.3))
       '@use-compose/ui':
-        specifier: 0.6.0
-        version: 0.6.0(typescript@5.9.3)
+        specifier: 0.7.0
+        version: 0.7.0(typescript@5.9.3)
       astro:
         specifier: ^5.4.1
         version: 5.18.1(rollup@4.59.0)(typescript@5.9.3)
@@ -1085,9 +1085,10 @@ packages:
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+    deprecated: Potential CWE-502 - Update to 1.3.1 or higher
 
-  '@use-compose/ui@0.6.0':
-    resolution: {integrity: sha512-RXJr06R16x5cGn6zLhVdbKBtAkyYR6olQf6MxUF3dwi001PUNejR6bUlOGCT35an/juab/8pP2oGGoTpyzwoZg==}
+  '@use-compose/ui@0.7.0':
+    resolution: {integrity: sha512-pKmB/uOyyYipMQYj0WVUOeBbOkzEM20XvSSuhf/bSkS5u+ZWikrg64B1/hJ4szfmURyprU9/5favkvS55qWGhw==}
     hasBin: true
 
   '@vitejs/plugin-vue-jsx@5.1.5':
@@ -4079,7 +4080,7 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@use-compose/ui@0.6.0(typescript@5.9.3)':
+  '@use-compose/ui@0.7.0(typescript@5.9.3)':
     dependencies:
       '@fontsource-variable/roboto': 5.2.9
       compression: 1.8.1
