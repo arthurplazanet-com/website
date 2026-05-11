@@ -2,11 +2,12 @@
 interface CardProps {
   title: string;
   description: string;
-  tags: string[];
+  tags: { label: string }[];
   links: { label: string; url: string }[];
 }
 
 const props = Astro.props as CardProps;
+console.log("📟 - props → ", props);
 const { title, description, tags, links } = props;
 ---
 
@@ -14,14 +15,14 @@ const { title, description, tags, links } = props;
   <h2>{title}</h2>
   <p>{description}</p>
   <ul>
-    {tags?.length > 0 && tags.map((tag) => <li>{tag}</li>)}
+    {tags?.length > 0 && tags.map((tag) => <li>{tag.label}</li>)}
   </ul>
   <ul>
     {
       links?.length > 0 &&
         links.map((link) => (
           <li>
-            <a href={link.url}>{link}</a>
+            <a href={link.url}>{link.label}</a>
           </li>
         ))
     }

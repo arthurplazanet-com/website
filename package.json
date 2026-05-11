@@ -14,15 +14,15 @@
   },
   "dependencies": {
     "@astrojs/vue": "^6.0.0",
-    "@use-compose/ui": "0.6.0",
-    "astro": "^5.4.1",
+    "@use-compose/ui": "0.7.0",
+    "astro": "^6.0.0",
     "vue": "^3.5.28"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^8.56.0",
     "eslint": "^10.0.1",
     "eslint-plugin-astro": "^1.6.0",
-    "prettier": "3.8.1",
+    "prettier": "3.8.3",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
     "stylelint": "^17.3.0",
