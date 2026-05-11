@@ -3,10 +3,12 @@ import { YFlow } from "@use-compose/ui";
 import ProjectList from "../projects/components/ProjectList.astro";
 import Layout from "../layouts/Layout.astro";
 import type { Project } from "../types/index.ts";
+import ProjectCard from "../projects/components/ProjectCard.astro";
 
 const response = await fetch(
   `${import.meta.env.PUBLIC_API_URL}/content/projects`,
 );
+console.log("📟 - response → ", response);
 console.log("📟 - response → ", response);
 const data = response.ok ? await response.json() : [];
 console.log("📟 - data → ", data);
@@ -19,11 +21,16 @@ console.log("📟 - hasProjects → ", hasProjects);
 <Layout>
   {
     !hasProjects ? (
-      <YFlow client:only="vue">
-        <p>No projects found.</p>
-      </YFlow>
+      <p>No projects found.</p>
     ) : (
-      <ProjectList projects={projects} />
+      <div>
+        <ul>
+          {projects.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </ul>
+        <ProjectList projects={projects} />
+      </div>
     )
   }
 </Layout>
