@@ -13,10 +13,16 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@astrojs/mdx": "^5.0.4",
     "@astrojs/vue": "^6.0.0",
     "@use-compose/ui": "0.7.0",
     "astro": "^6.0.0",
     "vue": "^3.5.28"
+  },
+  "pnpm": {
+    "overrides": {
+      "vue": "$vue"
+    }
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^8.56.0",

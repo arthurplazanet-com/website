@@ -1,4 +1,4 @@
-name: ci
+name: CI
 
 on:
   push:
@@ -24,6 +24,7 @@ jobs:
   build:
     if: ${{ ! startsWith(github.event.pull_request.head.ref, 'renovate/') }}
     uses: ./.github/workflows/build.yml
+    needs: lint_format
     with:
       node_version: 22
       PUBLIC_API_URL: ${{ vars.PUBLIC_API_URL }}
