@@ -39,7 +39,7 @@ jobs:
           cat .env
 
       - name: Build code
-        run: PUBLIC_API_URL=$ {{env.PUBLIC_API_URL}} pnpm build
+        run: PUBLIC_API_URL=${{inputs.PUBLIC_API_URL}} pnpm build
 
       - name: Upload-artifact if will deploy
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
