@@ -1,4 +1,4 @@
-name: ci
+name: CI
 
 on:
   push:
@@ -27,28 +27,3 @@ jobs:
     with:
       node_version: 22
       PUBLIC_API_URL: ${{ env.PUBLIC_API_URL }}
-
-      # SSH_KEY: ${{ secrets.SSH_KEY }}
-
-  deploy:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v8
-        with:
-          name: website-build
-          path: ./dist/
-
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          known_hosts: unnecessary
-
-      - name: Adding Known Hosts
-        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-
-      - name: Deploy build with rsync
-        run: rsync -avz ./dist/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/arthurplazanet.com/arthurplazanet.com/
