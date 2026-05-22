@@ -1,33 +1,39 @@
-name: Deploy Website
+name: Deploy
 
 on:
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
   workflow_dispatch:
+
+env:
+  PUBLIC_API_URL: https://api.arthurplazanet.com
 
 jobs:
   deploy:
+    name: Deploy to production
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    env:
-      PUBLIC_API_URL: https://api.arthurplazanet.com
     steps:
-      - name: Checkout
-        uses: actions/checkout@v6
+      # workflow_run: download artifact built by CI
+      - name: Download build artifact
+        if: ${{ github.event_name == 'workflow_run' }}
+        uses: actions/download-artifact@v8
         with:
-          ref: main
+          name: website-build
+          path: ./dist/
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Node.js and pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          version: 11
+      # # workflow_dispatch: full rebuild
+      # - name: Checkout
+      #   if: ${{ github.event_name == 'workflow_dispatch' }}
+      #   uses: actions/checkout@v6
+      #   with:
+      #     ref: main
 
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Sync types
-        run: node scripts/sync-types.mjs
-
-      - name: Build code
-        run: pnpm build
-
+      # common: SSH deploy
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
@@ -37,5 +43,5 @@ jobs:
       - name: Adding Known Hosts
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy build with rsync
-        run: rsync -avz ./dist/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/arthurplazanet.com/arthurplazanet.com/
+      - name: Deploy with rsync
+        run: rsync -avz ./website-build/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/arthurplazanet.com/arthurplazanet.com/
