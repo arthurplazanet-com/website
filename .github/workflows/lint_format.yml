@@ -7,6 +7,10 @@ on:
         required: true
         type: number
         default: 22
+      pnpm_version:
+        required: true
+        type: number
+        default: 10
 
 jobs:
   lint:
@@ -21,7 +25,7 @@ jobs:
         uses: ./.github/actions/install-dependencies
         with:
           node_version: ${{ inputs.node_version }}
-          pnpm_version: 9
+          pnpm_version: ${{ inputs.pnpm_version }}
           cache: "pnpm"
 
       - name: Lint
@@ -39,7 +43,7 @@ jobs:
         uses: ./.github/actions/install-dependencies
         with:
           node_version: ${{ inputs.node_version }}
-          pnpm_version: 9
+          pnpm_version: ${{ inputs.pnpm_version }}
           cache: "pnpm"
 
       - name: Format

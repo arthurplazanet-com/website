@@ -20,6 +20,7 @@ jobs:
     uses: ./.github/workflows/lint_format.yml
     with:
       node_version: 22
+      pnpm_version: 10
 
   build:
     if: ${{ ! startsWith(github.event.pull_request.head.ref, 'renovate/') }}
@@ -27,6 +28,7 @@ jobs:
     needs: lint_format
     with:
       node_version: 22
+      pnpm_version: 10
       PUBLIC_API_URL: ${{ vars.PUBLIC_API_URL }}
 
       # SSH_KEY: ${{ secrets.SSH_KEY }}

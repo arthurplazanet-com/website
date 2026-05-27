@@ -11,6 +11,10 @@ on:
         required: true
         type: string
         default: https://api.arthurplazanet.com
+      pnpm_version:
+        required: true
+        type: number
+        default: 10
 
 jobs:
   build:
@@ -26,7 +30,7 @@ jobs:
         uses: ./.github/actions/install-dependencies
         with:
           node_version: ${{ inputs.node_version }}
-          pnpm_version: 10
+          pnpm_version: ${{ inputs.pnpm_version }}
           cache: "pnpm"
 
       - name: Sync types
