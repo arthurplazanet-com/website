@@ -34,14 +34,14 @@ importers:
         specifier: ^1.6.0
         version: 1.7.0(eslint@10.6.0)
       prettier:
-        specifier: 3.9.4
-        version: 3.9.4
+        specifier: 3.9.5
+        version: 3.9.5
       prettier-plugin-astro:
         specifier: 0.14.1
         version: 0.14.1
       prettier-plugin-organize-imports:
         specifier: ^4.3.0
-        version: 4.3.0(prettier@3.9.4)(typescript@5.9.3)
+        version: 4.3.0(prettier@3.9.5)(typescript@5.9.3)
       stylelint:
         specifier: ^17.3.0
         version: 17.14.0(typescript@5.9.3)
@@ -2651,6 +2651,11 @@ packages:
 
   prettier@3.9.4:
     resolution: {integrity: sha512-yWG/o/4oJfo036EKAfK6ACAoDOfHeRHx4tuxkfBZiauURiaSmYwlpOr5LQqKtIkRD2z1PLteme2WoxEnj4tHTg==}
+    engines: {node: '>=14'}
+    hasBin: true
+
+  prettier@3.9.5:
+    resolution: {integrity: sha512-/FVl766LpUfB5vXgCYOYa0MeV/441Ia99AeICQIQFTY/Nw0roZwULcXpku5i1/m5kt/baz+s4Zogspd839HSMg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -6410,12 +6415,14 @@ snapshots:
       prettier: 3.9.4
       sass-formatter: 0.7.9
 
-  prettier-plugin-organize-imports@4.3.0(prettier@3.9.4)(typescript@5.9.3):
+  prettier-plugin-organize-imports@4.3.0(prettier@3.9.5)(typescript@5.9.3):
     dependencies:
-      prettier: 3.9.4
+      prettier: 3.9.5
       typescript: 5.9.3
 
   prettier@3.9.4: {}
+
+  prettier@3.9.5: {}
 
   prismjs@1.30.0: {}
 
