@@ -15,8 +15,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.1(astro@6.4.8(rollup@4.62.0)(supports-color@10.2.2))(supports-color@10.2.2)(vue@3.5.41(typescript@5.9.3))
       '@use-compose/ui':
-        specifier: 0.9.0
-        version: 0.9.0(typescript@5.9.3)
+        specifier: 0.9.1
+        version: 0.9.1(typescript@5.9.3)
       astro:
         specifier: ^6.0.0
         version: 6.4.8(rollup@4.62.0)(supports-color@10.2.2)
@@ -1155,8 +1155,8 @@ packages:
   '@ungap/structured-clone@1.3.1':
     resolution: {integrity: sha512-mUFwbeTqrVgDQxFveS+df2yfap6iuP20NAKAsBt5jDEoOTDew+zwLAOilHCeQJOVSvmgCX4ogqIrA0mnyr08yQ==}
 
-  '@use-compose/ui@0.9.0':
-    resolution: {integrity: sha512-l4GrrggVsSyRHPMpVImY6NvtSdDQ4VJJ/VfyabmN9rc+7zg4ejjrfxqsF9NuQrMfbzrdt+OU2t239DJWLQO97g==}
+  '@use-compose/ui@0.9.1':
+    resolution: {integrity: sha512-Ae/xqUdg2ou0qIqjt+ZbHkI9s0Y56vMfHLrMjpF8c9U2FgCSs6pfs5FzKSXY3ZMBq/+fGVnWL7WGzHeUrulNXw==}
     hasBin: true
 
   '@vitejs/plugin-vue-jsx@5.1.5':
@@ -4156,7 +4156,7 @@ snapshots:
 
   '@ungap/structured-clone@1.3.1': {}
 
-  '@use-compose/ui@0.9.0(typescript@5.9.3)':
+  '@use-compose/ui@0.9.1(typescript@5.9.3)':
     dependencies:
       '@fontsource-variable/roboto': 5.2.9
       culori: 4.0.1
@@ -4235,7 +4235,7 @@ snapshots:
       '@babel/core': 7.29.0(supports-color@10.2.2)
       '@babel/helper-module-imports': 7.28.6(supports-color@10.2.2)
       '@babel/helper-plugin-utils': 7.28.6
-      '@babel/parser': 7.29.7
+      '@babel/parser': 7.29.8
       '@vue/compiler-sfc': 3.5.41
     transitivePeerDependencies:
       - supports-color
