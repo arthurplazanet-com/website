@@ -15,8 +15,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.1(astro@6.4.8(rollup@4.62.0)(supports-color@10.2.2))(supports-color@10.2.2)(vue@3.5.41(typescript@5.9.3))
       '@use-compose/ui':
-        specifier: 0.10.1
-        version: 0.10.1(typescript@5.9.3)
+        specifier: 0.10.2
+        version: 0.10.2(typescript@5.9.3)
       astro:
         specifier: ^6.0.0
         version: 6.4.8(rollup@4.62.0)(supports-color@10.2.2)
@@ -1155,8 +1155,8 @@ packages:
   '@ungap/structured-clone@1.3.1':
     resolution: {integrity: sha512-mUFwbeTqrVgDQxFveS+df2yfap6iuP20NAKAsBt5jDEoOTDew+zwLAOilHCeQJOVSvmgCX4ogqIrA0mnyr08yQ==}
 
-  '@use-compose/ui@0.10.1':
-    resolution: {integrity: sha512-dJdf8jXtA2Qi4s+e0fArts6Wnb0buk8R6Supttnmi2WFSulWLUmzPCtcfueu89EeMrHmb1pyM8ZpJzKW/DihBA==}
+  '@use-compose/ui@0.10.2':
+    resolution: {integrity: sha512-ikKBr9LBqV5P7OurF1ldZKM7RrhEYynsUjH+pRtMpuObiXecrnX3mOI4bb4Eprli2eOfq1NWFUAw6mxODCTNLQ==}
     hasBin: true
 
   '@vitejs/plugin-vue-jsx@5.1.5':
@@ -4156,7 +4156,7 @@ snapshots:
 
   '@ungap/structured-clone@1.3.1': {}
 
-  '@use-compose/ui@0.10.1(typescript@5.9.3)':
+  '@use-compose/ui@0.10.2(typescript@5.9.3)':
     dependencies:
       '@fontsource-variable/roboto': 5.2.9
       culori: 4.0.1
