@@ -1,9 +1,9 @@
 ---
-title: "Why I fear Tailwind in the long term or in a big project"
-description: "A deep dive into the potential long-term challenges of using Tailwind CSS in large projects."
+title: 'Why I fear Tailwind in the long term or in a big project'
+description: 'A deep dive into the potential long-term challenges of using Tailwind CSS in large projects.'
 pubDate: 2024-06-17
 updatedDate: 2024-06-17
-slug: my
+slug: tailwind
 ---
 
 # Why I fear Tailwind in the long term or in a big project
@@ -15,9 +15,8 @@ Moving away from Tailwind is not _only_ a personal preference
 
 ## I care about bridging the gap between Developers and Design System foundations
 
-<a id="ds-conception"></a> Foundations are the core base variables that shape
-every color, size, and style in the product. 🎨 Once defined, they bring the
-first important factor: Consistency.
+<a id="ds-conception"></a> Foundations are the core base variables that shape every color, size, and
+style in the product. 🎨 Once defined, they bring the first important factor: Consistency.
 
 But here's one key: I think Consistency that can last without getting too much tech debt is to **limit these variables**, rather than having a larger scale.
 You can always extend later, but reducing is harder.
@@ -69,10 +68,7 @@ So you create components, it's fast and you might end-up with component as such 
 
 ```vue
 <template>
-  <div
-    id="default-daterangepicker"
-    class="rt-flex rt-items-center rt-gap-2 rt-flex-col"
-  >
+  <div id="default-daterangepicker" class="rt-flex rt-items-center rt-gap-2 rt-flex-col">
     <div class="rt-relative rt-w-full">
       <div
         class="rt-absolute rt-inset-y-0 rt-end-0 rt-flex rt-items-center rt-pe-4 rt-pointer-events-none"
@@ -121,7 +117,7 @@ But what if this component needs to be changed / modified in the future? This ch
 ### 1. Readability 👓
 
 - It can be hard hard to see what each tag is doing or rendering if no visual on a browser or so
-- There are a lot of `<div>` - and we _don't know at first what is doing what_, you need to read class by class to understand it, as elements are not identified (see [here](https://github.com/arthur-plazanet/thoughts/pull/1#naming-things))
+- There are a lot of `<div>` - and we _don't know at first what is doing what_, you need to read class by class to understand it, as elements are not identified (see [here](https://github.com/arthu-pr/thoughts/pull/1#naming-things))
 - `-neutral-400` or `-neutral-800` (or even with any word such `-primary-400` or `-primary-800` - even though a bit better) doesn't bring a lot of _context_
 
 ❓ Which brings the question: "Why this new language? What does it bring?"
@@ -149,7 +145,7 @@ Tailwind create utility classes that usually do one thing, based on declarative 
       - but for `align-items`, it is `items-*`
     - `font-weight` is `font-*` but `font-size` is `text-*`
     - `border-radius` is `rounded-*`
-- Maintainability is a concern, as we rely on an external tool (see [Tailwind v4](https://github.com/arthur-plazanet/thoughts/pull/1#tailwind-v4))
+- Maintainability is a concern, as we rely on an external tool (see [Tailwind v4](https://github.com/arthu-pr/thoughts/pull/1#tailwind-v4))
 
 ---
 
@@ -201,18 +197,12 @@ Here's our RtModalHeader:
     <slot>
       <div class="rt-flex rt-items-start rt-gap-x-4">
         <div class="rt-pt-2 rt-pb-4 rt-flex rt-flex-1 rt-flex-col rt-gap-y-1">
-          <RtHeading
-            size="2"
-            variant="bold"
-            class="rt-m-0 rt-text-neutral-900"
-            >{{ header }}</RtHeading
-          >
-          <RtHeading
-            size="3"
-            v-if="hasSubHeader"
-            class="rt-m-0 rt-text-neutral-700"
-            >{{ subHeader }}</RtHeading
-          >
+          <RtHeading size="2" variant="bold" class="rt-m-0 rt-text-neutral-900">{{
+            header
+          }}</RtHeading>
+          <RtHeading size="3" v-if="hasSubHeader" class="rt-m-0 rt-text-neutral-700">{{
+            subHeader
+          }}</RtHeading>
         </div>
         <div v-if="hasCloseButton" class="rt-flex rt-items-start">
           <RtIconButton variant="secondary" tone="neutral" @click="close">
@@ -419,12 +409,12 @@ test
 ```css
 @theme {
   --font-sans:
-    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  --font-serif: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
   --color-red-50: oklch(97.1% 0.013 17.38);
   --color-red-100: oklch(93.6% 0.032 17.717);
   --color-red-200: oklch(88.5% 0.062 18.334);

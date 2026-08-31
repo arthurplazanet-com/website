@@ -1,11 +1,11 @@
 // 1. Import utilities from `astro:content`
-import { defineCollection } from 'astro:content';
+import { defineCollection } from 'astro:content'
 
 // 2. Import loader(s)
-import { glob, file } from 'astro/loaders';
+import { glob } from 'astro/loaders'
 
 // 3. Import Zod
-import { z } from 'astro/zod';
+import { z } from 'astro/zod'
 
 // 4. Define a `loader` and `schema` for each collection
 const blog = defineCollection({
@@ -17,8 +17,6 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     slug: z.string().optional(),
   }),
-});
-console.log('📟 - blog → ', blog)
-
+})
 // 5. Export a single `collections` object to register your collection(s)
-export const collections = { blog };
+export const collections = { blog }

@@ -1,0 +1,185 @@
+/*
+ * Every Layout primitives — https://every-layout.dev/
+ *
+ * These live here, not in each component's scoped <style>, because the classes
+ * are the contract: `components/layout/*.astro` are thin shells that apply
+ * them, and markup elsewhere can use the class directly without dragging in a
+ * component. The `.cluster`, `.switcher` and flow primitives are NOT repeated
+ * here — @use-compose/ui already ships them in the `vendor` layer.
+ *
+ * Spacing comes from `--space-*` in tokens.css, which aliases compose's scale.
+ */
+
+/* --- Wrapper: a centred, width-capped column. ------------------------- */
+.wrapper {
+  /* https://grafikart.fr/tutoriels/conteneur-css-1233 */
+  width: min(var(--wrapper-max-width, var(--breakpoint-sm)), calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+@media screen and (min-width: 48rem) {
+  .wrapper {
+    --wrapper-max-width: var(--breakpoint-md);
+  }
+}
+
+/* --- Region: vertical breathing room for a page section. -------------- */
+.region {
+  padding-block: var(--_region-padding, var(--space-xl));
+  position: relative;
+}
+
+/* --- Center: one centred child, capped at a readable measure. --------- */
+.cs-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.cs-center > * {
+  margin: auto;
+  max-width: 34rem;
+}
+
+/*
+ * --- Cover: header pinned top, main vertically centred, footer pinned
+ * bottom. https://every-layout.dev/layouts/cover/
+ */
+.cover {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-block-size: 100%;
+}
+
+.cover > *:not(.cover-main) {
+  margin-block: var(--space-md);
+}
+
+.cover > :first-child {
+  margin-block-start: 0;
+}
+
+.cover > :last-child {
+  margin-block-end: 0;
+}
+
+.cover-main {
+  margin-block: auto;
+  width: 100%;
+}
+
+/*
+ * --- Reel: full-bleed horizontal scroller with snap points. Direct children
+ * stagger up/down (alternating align-self) for a masonry feel. Scrollbar
+ * treatment: https://every-layout.dev/layouts/reel/
+ */
+.reel-shell {
+  /* The shell replaces `.reel` as the flex child of whatever contains it, so
+     it has to take the width the reel used to. */
+  flex: 1;
+  min-inline-size: 0;
+}
+
+.reel-counter {
+  margin: var(--space-xs) 0 0;
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  opacity: 0.65;
+}
+
+.reel-counter__sep {
+  margin-inline: 0.35em;
+  opacity: 0.6;
+}
+
+.reel {
+  display: flex;
+  align-items: center;
+
+  /* Fluid: ~220px at 320px viewports up to the original 520px at 1240px+, so
+     images don't blow past the viewport width on small screens. */
+  block-size: clamp(220px, 115px + 32vw, 520px);
+  overflow: auto hidden;
+
+  /*
+   * Snap lives here, on the element that actually scrolls. `proximity` rather
+   * than `mandatory`: Reel.astro drives `scrollLeft` imperatively, and
+   * mandatory snapping fights that by re-snapping mid-gesture.
+   */
+  scroll-snap-type: x proximity;
+
+  /*
+   * The gallery sits inside a ScrollTrigger snap section. Without this,
+   * swiping past either end of the reel chains to the page and jumps to the
+   * next section mid-browse.
+   */
+  overscroll-behavior-x: contain;
+}
+
+/* Only advertise dragging when there is somewhere to drag to. */
+.reel.overflowing {
+  cursor: grab;
+  padding-block-end: var(--space-sm);
+}
+
+.reel.is-dragging {
+  cursor: grabbing;
+
+  /* Otherwise the drag selects the images/alt text as it goes. */
+  user-select: none;
+}
+
+.reel::-webkit-scrollbar {
+  height: 30px;
+}
+
+.reel::-webkit-scrollbar-thumb {
+  /* `background-image` gradients aren't rendered on this pseudo-element in
+     current Chrome (confirmed on two installs), unlike the older Every Layout
+     technique — use `border` instead for the same framed look. */
+  background-color: var(--primary);
+}
+
+@media (min-width: 640px) {
+  .reel::-webkit-scrollbar-thumb {
+    border-right: 0.85rem solid var(--accent);
+    background-clip: padding-box;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+  }
+}
+
+/* Firefox */
+@supports not selector(::-webkit-scrollbar) {
+  .reel {
+    scrollbar-color: var(--primary) var(--background);
+  }
+}
+
+.reel > * {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.reel > img {
+  block-size: calc(100% - var(--space-xl));
+  flex-basis: auto;
+  width: auto;
+}
+
+.reel > *:nth-child(odd) {
+  align-self: flex-end;
+}
+
+.reel > *:nth-child(even) {
+  align-self: flex-start;
+}
+
+.reel > * + * {
+  margin-inline-start: var(--space-md);
+}

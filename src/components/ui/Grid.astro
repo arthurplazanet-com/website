@@ -1,0 +1,48 @@
+---
+// Every Layout "Grid" — https://every-layout.dev/layouts/grid/
+// Columns are decided by the browser from `min`, not by a column count computed
+// in the frontmatter: the number of items is a data concern, how many fit on a
+// line is a layout one. `max` only caps how wide the grid is allowed to spread,
+// so a two-item list doesn't stretch into two half-page columns.
+interface Props {
+  /** Smallest a column may get before the grid drops to fewer columns. */
+  min?: string
+  /** Upper bound on columns, whatever the available width. */
+  max?: number
+  gap?: string
+  class?: string
+}
+
+const { min = '12rem', max = 4, gap = 'var(--spacing-md, 1.5rem)', class: className } = Astro.props
+---
+
+<div
+  class:list={['grid', className]}
+  style={`--grid-min:${min};--grid-max:${max};--grid-gap:${gap}`}
+>
+  <slot />
+</div>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--grid-gap);
+    /*
+     * `auto-fit` + `minmax` is the responsive half. The `max(...)` is the column
+     * cap: (100% - gutters) / max is the width a track would have at exactly
+     * `max` columns, so asking for at least that much forbids a narrower — and
+     * therefore more numerous — track. `min(…, 100%)` keeps a single column from
+     * overflowing a viewport narrower than `--grid-min`.
+     */
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(
+        min(
+          max(var(--grid-min), (100% - (var(--grid-max) - 1) * var(--grid-gap)) / var(--grid-max)),
+          100%
+        ),
+        1fr
+      )
+    );
+  }
+</style>

@@ -1,0 +1,17 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+
+# One Vue for the whole tree. Two copies in a single render break `renderSlot`: it reads
+# `currentRenderingInstance`, which only the other copy ever sets — @use-compose/ui pulls
+# its own Vue, so without this the site builds but throws while rendering.
+# The catalog is the version's single source of truth: package.json says `catalog:`, and
+# the override drags transitive dependents onto the same entry.
+catalog:
+  vue: ^3.5.28
+
+minimumReleaseAgeExclude:
+  - '@use-compose/ui@0.10.1 || 0.10.2 || 1.2.0'
+
+overrides:
+  vue: 'catalog:'

@@ -1,0 +1,68 @@
+/* Document-level defaults. Anything scoped to a component belongs in that
+   component's own <style>, not here. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.app {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg-light);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100svh;
+}
+
+/* Compose stamps `data-compose-ui="block"` on every component root, so this is
+   the narrowest hook for "text inside a library component", short of
+   restyling each component. */
+[data-compose-ui='block'] {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-title);
+    color: var(--text);
+  }
+
+  p,
+  li,
+  a,
+  span,
+  button,
+  input,
+  .y-button {
+    font-family: var(--font-body);
+    color: var(--text);
+  }
+}
+
+/*
+ * ScrollSmoother owns the actual scroll (see SmoothScrollSnap.astro) — it
+ * requires document/window-level scrolling, so the real scrollbar lives on
+ * `html`, not on `main`.
+ */
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-color: var(--primary) var(--background);
+    scrollbar-width: auto;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--background);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border-radius: 0;
+  border: 1px solid var(--background);
+}

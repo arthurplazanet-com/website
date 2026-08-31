@@ -1,0 +1,8 @@
+# Fetched over the network by `pnpm sync-types` and gitignored via src/.gitignore, which
+# Prettier does not read (it only picks up the root .gitignore). Formatting them would be
+# undone by the next sync.
+src/types/
+
+pnpm-lock.yaml
+dist/
+.astro/
