@@ -1,0 +1,24 @@
+::-webkit-scrollbar {
+  width: 2px; /* Mostly for vertical scrollbars */
+  height: 20px; /* Mostly for horizontal scrollbars */
+  margin: -10px;
+  transform: translateY(-25%);
+}
+:-webkit-scrollbar-thumb {
+  /* Foreground */
+  background: green;
+}
+
+::-webkit-scrollbar-track-piece {
+  /* Scrollbar background */
+  /* background: red; */
+}
+::-webkit-scrollbar-thumb {
+  /* Scrollbar foreground */
+  background: yellow;
+}
+::-webkit-scrollbar-track {
+  /* Background */
+  background: blue;
+  top: 20px;
+}

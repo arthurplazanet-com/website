@@ -1,0 +1,33 @@
+@layer components {
+  .projects {
+    counter-reset: shown;
+  }
+
+  /* the count comes back out of a CSS counter: hidden cells do not increment,
+     so it stays true without anyone recomputing it */
+
+  .lattice {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr));
+    gap: 1px;
+    background: var(--shelf-g3);
+    border: 1px solid var(--shelf-g3);
+  }
+
+  /* cells arrive in reading order rather than all at once */
+  .lattice > * {
+    animation: cell-in 320ms var(--ease) both;
+    animation-delay: var(--stagger, 0ms);
+  }
+
+  @keyframes cell-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

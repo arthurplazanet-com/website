@@ -1,0 +1,161 @@
+/*
+ * The shelf: three books, one turn.
+ *
+ * State is three radios read by :has(), so every transition here works before
+ * the island hydrates and keeps working with the <script> deleted. Script adds
+ * grab-drag and nothing else.
+ */
+@layer components {
+  .shelf-root {
+    --shelf-g1: rgb(254 254 254 / 62%);
+    --shelf-g2: rgb(254 254 254 / 34%);
+    --shelf-g3: rgb(254 254 254 / 15%);
+    --shelf-g4: rgb(254 254 254 / 7%);
+    --shelf-raise: #141414;
+
+    --spine: 3.75rem;
+    --pad: clamp(1rem, 2.4vw, 2.25rem);
+    --turn: 780ms;
+    --ease: cubic-bezier(0.65, 0, 0.35, 1);
+    --snap: 150ms linear;
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    block-size: 100svh;
+    overflow: hidden;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+  }
+
+  /* YScreen puts margin-block on its children; the shelf owns its own spacing */
+  .shelf-root > * {
+    margin-block: 0;
+  }
+
+  .shelf-state {
+    position: absolute;
+    inline-size: 0;
+    block-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    appearance: none;
+  }
+
+  /* ── stage ─────────────────────────────────────────────
+     Books lie flat in a stack. Only the one you leave turns. */
+  .shelf {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--spine);
+    flex: 1 1 auto;
+    min-block-size: 0;
+  }
+
+  .stage {
+    position: relative;
+    min-inline-size: 0;
+    perspective: 2400px;
+    perspective-origin: 50% 45%;
+    transform-style: preserve-3d;
+  }
+
+  .book {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--bg);
+    transform-origin: left center;
+    backface-visibility: hidden;
+    transition: transform var(--turn) var(--ease);
+  }
+
+  .book--id {
+    z-index: 3;
+  }
+  .book--projects {
+    z-index: 2;
+  }
+  .book--experience {
+    z-index: 1;
+  }
+
+  /* the pages you have turned past */
+  :root:has(#book-projects:checked) .book--id,
+  :root:has(#book-experience:checked) .book--id,
+  :root:has(#book-experience:checked) .book--projects {
+    transform: rotateY(-155deg) translateZ(2px);
+  }
+
+  /* a turned page must not swallow clicks meant for the one underneath */
+  :root:has(#book-projects:checked) .book--id,
+  :root:has(#book-experience:checked) .book--id,
+  :root:has(#book-experience:checked) .book--projects {
+    pointer-events: none;
+  }
+
+  :root:has(.shelf-drag) .book {
+    transition: none;
+  }
+
+  /* ── every book shares this frame ──────────────────── */
+  .book__inner {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 0.9rem;
+    min-block-size: 0;
+    padding: var(--pad);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--shelf-g3) transparent;
+  }
+
+  .book__head {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 1rem;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-block-end: 0.6rem;
+    border-block-end: 1px solid var(--shelf-g3);
+  }
+
+  .book__foot {
+    flex: 0 0 auto;
+    padding-block-start: 0.6rem;
+    margin-block-start: auto;
+    border-block-start: 1px solid var(--shelf-g3);
+  }
+
+  .book__foot span::after {
+    content: counter(shown);
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .shelf-dot {
+    inline-size: 6px;
+    block-size: 6px;
+    flex: 0 0 auto;
+    background: currentcolor;
+  }
+
+  @media (width <= 720px) {
+    .shelf-root {
+      --spine: 2.6rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .book {
+      transition-duration: 1ms !important;
+    }
+  }
+}

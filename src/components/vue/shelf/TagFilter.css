@@ -1,0 +1,89 @@
+@layer components {
+  .tag-filter.y-section {
+    --switcher-modifier: 22rem;
+
+    align-items: center;
+
+    gap: 0.9rem;
+    padding: 0;
+    background: none;
+    border: 0;
+  }
+
+  .tag-filter__input {
+    position: absolute;
+    inline-size: 0;
+    block-size: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    appearance: none;
+  }
+
+  .tag-filter__row {
+    gap: 0.35rem;
+    align-items: center;
+    min-inline-size: 0;
+  }
+
+  /* the label is the control, so it carries the hit area and the focus ring */
+  .tag-filter__chip {
+    cursor: pointer;
+  }
+
+  .tag-filter__input:focus-visible + .tag-filter__row .tag-filter__chip,
+  .tag-filter__chip:focus-within {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  /* YChip keeps a button-style depth affordance by default; the lattice is flat */
+  .tag-filter__chip .y-chip {
+    box-shadow: none;
+    transform: none;
+    font-size: var(--text-label);
+    color: var(--shelf-g1);
+    background: transparent;
+    border: 1px solid var(--shelf-g3);
+    border-radius: 0;
+  }
+
+  .tag-filter__chip:hover .y-chip {
+    color: var(--text);
+    border-color: var(--shelf-g1);
+  }
+
+  .tag-filter__chip .y-chip b {
+    margin-inline-start: 0.4rem;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.6;
+  }
+
+  .tag-filter__clear {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center;
+    padding: 0.35rem 0.7rem;
+    font: inherit;
+    font-size: var(--text-label);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    cursor: pointer;
+    background: none;
+    border: 1px solid transparent;
+  }
+
+  .tag-filter__clear:hover {
+    color: var(--bg);
+    background: var(--primary);
+  }
+
+  /* nothing selected, nothing to clear */
+  .tag-filter:not(:has(.tag-filter__input:checked)) .tag-filter__clear {
+    opacity: 0;
+    pointer-events: none;
+  }
+}

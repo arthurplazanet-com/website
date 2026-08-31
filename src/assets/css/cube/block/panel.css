@@ -1,0 +1,32 @@
+.panel-wrapper {
+  height: 100svh;
+  height: 100%;
+  width: 100dvw;
+  width: 100%;
+  overflow: hidden;
+  z-index: 0;
+  position: absolute;
+  /* display: inline-flex; */
+
+  .panel-section {
+    position: relative;
+    inset: 0;
+    --panel-width: 100dvw;
+    height: 100%;
+    max-width: var(--panel-width);
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-bg);
+    /* align-items: center; */
+    z-index: 1;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out;
+    /* transform: translateX(calc((100dvw - var(--panel-width)) / 2)); */
+  }
+}
+.panel-wrapper .panel-section:has(svg:active) {
+  width: 90%;
+  z-index: 1;
+
+  transition: width 0.3s ease-in-out;
+}

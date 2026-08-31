@@ -1,36 +1,20 @@
 ---
-import { YFlow } from "@use-compose/ui";
-import ProjectList from "../projects/components/ProjectList.astro";
-import Layout from "../layouts/Layout.astro";
-import type { Project } from "../types/index.ts";
-import ProjectCard from "../projects/components/ProjectCard.astro";
+import Layout from '../layouts/Layout.astro'
+import HomeView from '../components/vue/views/HomeView.vue'
+import type { Project } from '../types/index.ts'
 
-const response = await fetch(
-  `${import.meta.env.PUBLIC_API_URL}/content/projects`,
-);
-console.log("📟 - response → ", response);
-console.log("📟 - response → ", response);
-const data = response.ok ? await response.json() : [];
-console.log("📟 - data → ", data);
-const projects: Project[] = Array.isArray(data) ? data : [];
-console.log("📟 - projects → ", projects);
-const hasProjects = projects && projects.length > 0;
-console.log("📟 - hasProjects → ", hasProjects);
+// A dead API shouldn't take the build down with it — the list renders its own
+// empty state, so fall back to nothing and keep going.
+let projects: Project[] = []
+try {
+  const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/content/projects`)
+  const data = response.ok ? await response.json() : []
+  projects = Array.isArray(data) ? data : []
+} catch (error) {
+  console.warn('[index] could not load projects:', error)
+}
 ---
 
-<Layout>
-  {
-    !hasProjects ? (
-      <p>No projects found.</p>
-    ) : (
-      <div>
-        <ul>
-          {projects.map((project) => (
-            <ProjectCard project={project} />
-          ))}
-        </ul>
-        <ProjectList projects={projects} />
-      </div>
-    )
-  }
+<Layout title="Arthur Plazanet - Software Engineer">
+  <HomeView client:load projects={projects} />
 </Layout>

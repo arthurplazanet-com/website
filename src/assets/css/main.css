@@ -1,0 +1,53 @@
+/*
+ * The single stylesheet the site loads (from layouts/Layout.astro). Layer order
+ * is the whole cascade strategy: @use-compose/ui lands in `vendor`, and every
+ * layer after it can override the library by name instead of by specificity
+ * tricks. Astro's scoped component <style> blocks are unlayered, so they still
+ * beat everything here — which is right, they're the most local rules there
+ * are. Keep this file the only place that declares layer order; a second
+ * `@layer a, b;` elsewhere would silently reorder the cascade.
+ *
+ * The `layer(vendor)` on the import below is load-bearing. @use-compose/ui
+ * declares its own `@layer base, theme, tokens, components, utilities` — the
+ * same names used here — so importing it unlayered merges its rules into
+ * these layers, and precedence then falls out of declaration order rather
+ * than intent (its `utilities` beat our `components`, whatever the selector).
+ * Wrapping it nests those as `vendor.*`, before everything of ours.
+ *
+ * Both names are declared on purpose, so this works either way: today the
+ * published package is unlayered and `layer(vendor)` does the nesting; once it
+ * ships pre-wrapped in `@layer compose-ui`, that name is already ordered here.
+ * An undeclared layer sorts *after* every declared one, which is worse than no
+ * layering at all — so the name must exist before the package starts using it.
+ *
+ * Vite emits `[esbuild css minify]` warnings for `@import … layer()` when the
+ * imported sheet itself contains `@layer` blocks. The output is correct; the
+ * warnings go away once the library wraps itself and this can become a plain
+ * `@import`.
+ */
+@layer compose-ui, vendor, tokens, base, layout, components, utilities;
+
+@import '@use-compose/ui/style.css' layer(vendor);
+@import './tokens.css' layer(tokens);
+@import './base.css' layer(base);
+@import './cube/layout.css' layer(layout);
+@import './cube/block/panel.css' layer(components);
+
+@layer vendor {
+  :where(:not(dialog)) {
+    margin: initial;
+  }
+}
+
+@layer components {
+  /*
+   * Compose caps `.card-media` at 5rem, which crops any real cover image to a
+   * sliver. Cards drive their own height through `--card-media-height`
+   * instead (ui/Card.astro's `mediaHeight` prop sets it); the 5rem stays as
+   * the fallback so cards that don't ask for one are unaffected.
+   */
+  .card-media {
+    max-height: none;
+    height: var(--card-media-height, 5rem);
+  }
+}

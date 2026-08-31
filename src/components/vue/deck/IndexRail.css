@@ -1,0 +1,185 @@
+@layer components {
+  .deck-rail {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg-light);
+    border-right: 1px solid var(--deck-g3);
+    box-sizing: border-box;
+    touch-action: pan-y;
+    cursor: grab;
+  }
+
+  .deck-rail:active {
+    cursor: grabbing;
+  }
+
+  .deck-root:has(.deck-state:focus-visible) .deck-rail {
+    outline: 2px solid var(--primary);
+    outline-offset: -2px;
+  }
+
+  .deck-rail-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--primary);
+    opacity: 0;
+    transform: scaleY(var(--deck-p));
+    transform-origin: 50% 100%;
+    transition: opacity 120ms linear;
+    pointer-events: none;
+  }
+
+  .deck-viewport[data-dragging] .deck-rail-fill {
+    opacity: 0.16;
+  }
+
+  .deck-rail-head,
+  .deck-rail-back,
+  .deck-rail-index {
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .deck-rail-head {
+    margin: 0;
+    padding: 0.5rem 0.3rem;
+    font-size: 9px;
+    line-height: 1.5;
+    letter-spacing: 0.12em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--deck-g2);
+    border-bottom: 1px solid var(--deck-g3);
+  }
+
+  .deck-rail-head b {
+    display: block;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+
+  .deck-rail-index {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: var(--deck-g3);
+    border-bottom: 1px solid var(--deck-g3);
+  }
+
+  .deck-rail-index li {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.42rem 0;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+    color: var(--deck-g2);
+    background: var(--bg-light);
+  }
+
+  .deck-rail-index li[data-live] {
+    color: var(--primary);
+  }
+
+  .deck-dot {
+    width: 4px;
+    height: 4px;
+    flex: 0 0 auto;
+    background: currentcolor;
+  }
+
+  /* the label covers the whole rail, so anywhere on it is the control */
+  .deck-rail-act {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 1.1rem;
+    color: var(--deck-g2);
+    cursor: pointer;
+    transition:
+      background var(--deck-snap),
+      color var(--deck-snap);
+  }
+
+  .deck-rail-act:hover {
+    background: rgb(254 254 254 / 5%);
+    color: var(--primary);
+  }
+
+  .deck-rail-act--back {
+    display: none;
+  }
+
+  .deck-root:has(#deck-open:checked) .deck-rail-act--open {
+    display: none;
+  }
+  .deck-root:has(#deck-open:checked) .deck-rail-act--back {
+    display: flex;
+  }
+
+  /* the rail header is the destination label; once you are there, the same
+     strip becomes the way out */
+  .deck-root:has(#deck-open:checked) .deck-rail-head {
+    display: none;
+  }
+
+  .deck-rail-back {
+    display: none;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: center;
+    align-self: stretch;
+    padding: 0.6rem 0;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text);
+    background: var(--deck-raise);
+    border-bottom: 1px solid var(--deck-g3);
+    --deck-ico-size: 16px;
+
+    pointer-events: none;
+    transition:
+      background var(--deck-snap),
+      color var(--deck-snap);
+  }
+
+  .deck-root:has(#deck-open:checked) .deck-rail-back {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: center;
+  }
+
+  /* the whole rail is the label, so hovering anywhere lights the button */
+  .deck-root:has(#deck-open:checked) .deck-rail:hover .deck-rail-back {
+    background: var(--primary);
+    color: var(--bg);
+  }
+}
+
+@layer components {
+  .deck-rail .y-vertical-title {
+    margin: 0;
+    font-size: 9.5px;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: inherit;
+  }
+}

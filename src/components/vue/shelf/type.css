@@ -1,0 +1,77 @@
+/*
+ * The shelf's type scale.
+ *
+ * Utopia-shaped (fluid clamps between a 360px and a 1600px viewport) but
+ * scaled for this page rather than inherited: the same lineage as
+ * www/css/brutally-css, with H1/H2 kept deliberately loud.
+ *
+ * Two rules the previous iteration broke and this one keeps:
+ *   1. Nothing interactive below --text-label (~12.5px). The old deck put
+ *      9px on the filter chips and toolbar toggles — the controls were the
+ *      least visible thing on screen.
+ *   2. No literal px font-size anywhere. Every size comes from a step.
+ */
+@layer components {
+  .shelf-root {
+    --step--1: clamp(0.78rem, 0.745rem + 0.16vw, 0.9rem); /*  12.5 → 14.4 */
+    --step-0: clamp(0.94rem, 0.895rem + 0.2vw, 1.06rem); /*  15   → 17   */
+    --step-1: clamp(1.18rem, 1.06rem + 0.53vw, 1.5rem); /*  19   → 24   */
+    --step-2: clamp(1.48rem, 1.24rem + 1.05vw, 2.25rem); /*  24   → 36   */
+    --step-3: clamp(1.85rem, 1.4rem + 1.98vw, 3.4rem); /*  30   → 54   */
+    --step-4: clamp(2.3rem, 1.5rem + 3.5vw, 5.1rem); /*  37   → 82   */
+    --step-5: clamp(2.9rem, 1.4rem + 6.4vw, 7.6rem); /*  46   → 122  */
+
+    /* roles, so a component never names a step directly */
+    --text-label: var(--step--1);
+    --text-body: var(--step-0);
+    --text-lead: var(--step-1);
+    --h3: var(--step-2);
+    --h2: var(--step-3);
+    --h1: var(--step-5);
+
+    font-size: var(--text-body);
+    line-height: 1.5;
+  }
+
+  /*
+   * Compose's core.css puts `font-family: gotham, sans-serif` on every h1–h4
+   * inside [data-compose-ui='app']. Gotham is not installed on this site —
+   * there is no public/fonts/gotham — so those headings silently fall back to
+   * the browser's default sans. Doubling .shelf-root wins the specificity
+   * tie without reaching for !important.
+   */
+  .shelf-root.shelf-root :is(h1, h2, h3, h4) {
+    margin: 0;
+    font-family: var(--font-title);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .shelf-root.shelf-root h1 {
+    font-size: var(--h1);
+    line-height: 0.84;
+  }
+  .shelf-root.shelf-root h2 {
+    font-size: var(--h2);
+  }
+  .shelf-root.shelf-root h3 {
+    font-size: var(--h3);
+  }
+
+  .shelf-root p {
+    margin: 0;
+    font-size: var(--text-body);
+  }
+
+  /* eyebrows and meta — the only place small caps are allowed, and never on
+     anything clickable */
+  .shelf-label {
+    font-size: var(--text-label);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--shelf-g2);
+  }
+}
