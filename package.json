@@ -13,8 +13,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/mdx": "^5.0.4",
-    "@astrojs/vue": "^6.0.0",
+    "@astrojs/mdx": "^7.0.0",
+    "@astrojs/vue": "^7.0.0",
     "@use-compose/ui": "1.2.0",
     "astro": "^6.0.0",
     "vue": "^3.5.28"
