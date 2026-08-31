@@ -15,8 +15,8 @@
       </YHighlightedText>
 
       <p class="deck-id-sub">
-        Design systems, component libraries and the build plumbing under them — Vue
-        and Nuxt on the front, AdonisJS and GitHub Actions behind it.
+        Design systems, component libraries and the build plumbing under them — Vue and Nuxt on the
+        front, AdonisJS and GitHub Actions behind it.
       </p>
 
       <!-- the whole portfolio is readable before you move anything -->
@@ -28,7 +28,7 @@
         <li v-for="record in records" :key="record.key">
           <b>{{ record.index }}</b>
           <span class="deck-index-name">{{ record.title }}</span>
-          <span class="deck-index-tags">{{ record.tags.slice(0, 3).join(" · ") }}</span>
+          <span class="deck-index-tags">{{ record.tags.slice(0, 3).join(' · ') }}</span>
           <span class="deck-index-state" :data-live="record.live || undefined">
             <i class="deck-dot" />{{ record.status }}
           </span>
@@ -52,17 +52,17 @@
 </template>
 
 <script setup lang="ts">
-import { YHighlightedText, YRow, YSection, YStack } from "@use-compose/ui";
-import DeckIcon from "./icons/DeckIcon.vue";
-import type { DeckRecord } from "./records";
-import "./IdentityPanel.css";
+import { YHighlightedText, YRow, YSection, YStack } from '@use-compose/ui'
+import DeckIcon from './icons/DeckIcon.vue'
+import type { DeckRecord } from './records'
+import './IdentityPanel.css'
 
-defineProps<{ records: DeckRecord[] }>();
+defineProps<{ records: DeckRecord[] }>()
 
 const FACTS: Array<[string, string]> = [
-  ["Front", "Vue 3 · Nuxt 4 · Astro 6 · MDX"],
-  ["Back", "AdonisJS 6 · TypeScript · Node 22"],
-  ["Ops", "GitHub Actions · rsync · VPS"],
-  ["Tooling", "pnpm · Renovate · Vite"],
-];
+  ['Front', 'Vue 3 · Nuxt 4 · Astro 6 · MDX'],
+  ['Back', 'AdonisJS 6 · TypeScript · Node 22'],
+  ['Ops', 'GitHub Actions · rsync · VPS'],
+  ['Tooling', 'pnpm · Renovate · Vite'],
+]
 </script>

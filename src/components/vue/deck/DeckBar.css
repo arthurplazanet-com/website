@@ -46,7 +46,9 @@
     color: var(--deck-g2);
   }
 
-  .deck-toolbar-cell--wide { margin-right: auto; }
+  .deck-toolbar-cell--wide {
+    margin-right: auto;
+  }
 
   .deck-dot--live {
     width: 7px;
@@ -56,8 +58,14 @@
   }
 
   @keyframes deck-blip {
-    0%, 70% { opacity: 1; }
-    71%, 100% { opacity: 0.25; }
+    0%,
+    70% {
+      opacity: 1;
+    }
+    71%,
+    100% {
+      opacity: 0.25;
+    }
   }
 
   .deck-toolbar-btn {
@@ -71,7 +79,9 @@
     color: var(--deck-g2);
     cursor: pointer;
     border-left: 1px solid var(--deck-g3);
-    transition: color var(--deck-snap), background var(--deck-snap);
+    transition:
+      color var(--deck-snap),
+      background var(--deck-snap);
   }
 
   .deck-toolbar-btn:hover {
@@ -93,7 +103,9 @@
     border: 1px solid var(--deck-g2);
   }
 
-  .deck-toolbar-btn:has(input:checked) { color: var(--text); }
+  .deck-toolbar-btn:has(input:checked) {
+    color: var(--text);
+  }
   .deck-toolbar-btn:has(input:checked) .deck-toolbar-box {
     background: var(--primary);
     border-color: var(--primary);
@@ -105,27 +117,45 @@
   }
 
   /* gutter mode: cells stop sharing hairlines and become discrete objects */
-  :root[data-deck-gutters="on"] .deck-root { --deck-gap: 12px; }
+  :root[data-deck-gutters='on'] .deck-root {
+    --deck-gap: 12px;
+  }
 
-  :root[data-deck-gutters="on"] .deck-lattice {
+  :root[data-deck-gutters='on'] .deck-lattice {
     padding: 12px var(--deck-pad);
     background: transparent;
     border-bottom: 0;
   }
 
-  :root[data-deck-gutters="on"] .deck-scroller { background-image: none; }
-  :root[data-deck-gutters="on"] .deck-cell { border: 1px solid var(--deck-g3); }
+  :root[data-deck-gutters='on'] .deck-scroller {
+    background-image: none;
+  }
+  :root[data-deck-gutters='on'] .deck-cell {
+    border: 1px solid var(--deck-g3);
+  }
 
   @media (width <= 720px) {
-    .deck-toolbar-cell--wide { display: none; }
-    .deck-toolbar-brand em { display: none; }
-    .deck-toolbar { padding-left: 0.75rem; }
+    .deck-toolbar-cell--wide {
+      display: none;
+    }
+    .deck-toolbar-brand em {
+      display: none;
+    }
+    .deck-toolbar {
+      padding-left: 0.75rem;
+    }
   }
 }
 
 @layer components {
-  .deck-hint-open { display: none; }
+  .deck-hint-open {
+    display: none;
+  }
 
-  .deck-root:has(#deck-open:checked) .deck-hint-shut { display: none; }
-  .deck-root:has(#deck-open:checked) .deck-hint-open { display: block; }
+  .deck-root:has(#deck-open:checked) .deck-hint-shut {
+    display: none;
+  }
+  .deck-root:has(#deck-open:checked) .deck-hint-open {
+    display: block;
+  }
 }

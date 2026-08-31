@@ -20,14 +20,14 @@
 </template>
 
 <script setup lang="ts">
-import { YVerticalTitle } from "@use-compose/ui";
-import { useTemplateRef } from "vue";
-import "./BookSwitcher.css";
+import { YVerticalTitle } from '@use-compose/ui'
+import { useTemplateRef } from 'vue'
+import './BookSwitcher.css'
 
 defineProps<{
-  books: Array<{ id: string; no: string; name: string; count: number | string }>;
-}>();
+  books: Array<{ id: string; no: string; name: string; count: number | string }>
+}>()
 
 // The parent drives the drag and needs the element, not a copy of the state.
-defineExpose({ el: useTemplateRef("rail") });
+defineExpose({ el: useTemplateRef('rail') })
 </script>

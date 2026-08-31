@@ -6,23 +6,18 @@
 // so a two-item list doesn't stretch into two half-page columns.
 interface Props {
   /** Smallest a column may get before the grid drops to fewer columns. */
-  min?: string;
+  min?: string
   /** Upper bound on columns, whatever the available width. */
-  max?: number;
-  gap?: string;
-  class?: string;
+  max?: number
+  gap?: string
+  class?: string
 }
 
-const {
-  min = "12rem",
-  max = 4,
-  gap = "var(--spacing-md, 1.5rem)",
-  class: className,
-} = Astro.props;
+const { min = '12rem', max = 4, gap = 'var(--spacing-md, 1.5rem)', class: className } = Astro.props
 ---
 
 <div
-  class:list={["grid", className]}
+  class:list={['grid', className]}
   style={`--grid-min:${min};--grid-max:${max};--grid-gap:${gap}`}
 >
   <slot />
@@ -43,10 +38,7 @@ const {
       auto-fit,
       minmax(
         min(
-          max(
-            var(--grid-min),
-            (100% - (var(--grid-max) - 1) * var(--grid-gap)) / var(--grid-max)
-          ),
+          max(var(--grid-min), (100% - (var(--grid-max) - 1) * var(--grid-gap)) / var(--grid-max)),
           100%
         ),
         1fr

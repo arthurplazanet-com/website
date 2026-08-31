@@ -1,30 +1,28 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import SiteWrapper from "../components/vue/views/SiteWrapper.vue";
-import type { Experience, Project } from "../types/index.ts";
-import KeplaIcon from "../components/vue/icons/KeplaIcon.vue/index.js";
-import LabView from "../components/vue/views/LabView.vue";
-import DeckView from "../components/vue/deck/DeckView.vue";
-import ShelfView from "../components/vue/shelf/ShelfView.vue";
+import Layout from '../layouts/Layout.astro'
+import SiteWrapper from '../components/vue/views/SiteWrapper.vue'
+import type { Experience, Project } from '../types/index.ts'
+import KeplaIcon from '../components/vue/icons/KeplaIcon.vue/index.js'
+import LabView from '../components/vue/views/LabView.vue'
+import DeckView from '../components/vue/deck/DeckView.vue'
+import ShelfView from '../components/vue/shelf/ShelfView.vue'
 // Same contract as index.astro: a dead API must not take the build down. Each
 // book renders its own empty state, so fall back to nothing and keep going.
 async function content<T>(path: string): Promise<T[]> {
   try {
-    const response = await fetch(
-      `${import.meta.env.PUBLIC_API_URL}/content/${path}`,
-    );
-    const data = response.ok ? await response.json() : [];
-    return Array.isArray(data) ? (data as T[]) : [];
+    const response = await fetch(`${import.meta.env.PUBLIC_API_URL}/content/${path}`)
+    const data = response.ok ? await response.json() : []
+    return Array.isArray(data) ? (data as T[]) : []
   } catch (error) {
-    console.warn(`[lab] could not load ${path}:`, error);
-    return [];
+    console.warn(`[lab] could not load ${path}:`, error)
+    return []
   }
 }
 
 const [projects, experiences] = await Promise.all([
-  content<Project>("projects"),
-  content<Experience>("experiences"),
-]);
+  content<Project>('projects'),
+  content<Experience>('experiences'),
+])
 ---
 
 <Layout title="Lab - Arthur Plazanet">

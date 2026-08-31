@@ -27,18 +27,12 @@
 </template>
 
 <script setup lang="ts">
-import type { YTheme } from "@use-compose/ui";
-import {
-  AppCompose,
-  YScreen,
-  YCenter,
-  YWrapper,
-  YButton,
-} from "@use-compose/ui";
-import type { Project, Experience } from "../../../types";
-import SiteHeader from "../ui/SiteHeader.vue";
-import lampImg from "../../../assets/img/lab/lamp.png";
-import { ref } from "vue";
+import type { YTheme } from '@use-compose/ui'
+import { AppCompose, YScreen, YCenter, YWrapper, YButton } from '@use-compose/ui'
+import type { Project, Experience } from '../../../types'
+import SiteHeader from '../ui/SiteHeader.vue'
+import lampImg from '../../../assets/img/lab/lamp.png'
+import { ref } from 'vue'
 
-const revealed = ref(false);
+const revealed = ref(false)
 </script>

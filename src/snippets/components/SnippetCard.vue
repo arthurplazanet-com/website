@@ -16,16 +16,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
-import { Card } from "@use-compose/ui";
-import TagList from "../../components/vue/ui/TagList.vue";
-import type { Snippet } from "../../types/index.ts";
+import { computed } from 'vue'
+import { Card } from '@use-compose/ui'
+import TagList from '../../components/vue/ui/TagList.vue'
+import type { Snippet } from '../../types/index.ts'
 
 const { snippet } = defineProps<{
-  snippet: Snippet;
-}>();
+  snippet: Snippet
+}>()
 
-const tags = computed(() => snippet.tags ?? []);
+const tags = computed(() => snippet.tags ?? [])
 </script>
 
 <style scoped>

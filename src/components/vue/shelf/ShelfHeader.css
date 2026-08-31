@@ -21,7 +21,9 @@
     text-decoration: none;
   }
 
-  .shelf-header__links { gap: 0 1.4rem }
+  .shelf-header__links {
+    gap: 0 1.4rem;
+  }
 
   .shelf-header__links a {
     display: inline-flex;
@@ -34,7 +36,9 @@
     color: var(--shelf-g1);
     text-decoration: none;
     border-block-end: 1px solid transparent;
-    transition: color var(--snap), border-color var(--snap);
+    transition:
+      color var(--snap),
+      border-color var(--snap);
   }
 
   .shelf-header__links a:hover {
@@ -58,11 +62,19 @@
   }
 
   @keyframes shelf-blip {
-    0%, 70% { opacity: 1 }
-    71%, 100% { opacity: 0.25 }
+    0%,
+    70% {
+      opacity: 1;
+    }
+    71%,
+    100% {
+      opacity: 0.25;
+    }
   }
 
   @media (width <= 720px) {
-    .shelf-header__status { display: none }
+    .shelf-header__status {
+      display: none;
+    }
   }
 }

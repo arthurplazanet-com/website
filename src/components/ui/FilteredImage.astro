@@ -9,29 +9,29 @@
  * default slot and let the calling card own the heading level, tags and
  * links.
  */
-import { Image } from "astro:assets";
+import { Image } from 'astro:assets'
 
 interface Props {
   /** Local import (ImageMetadata) or a remote URL string from the API. */
-  src: ImageMetadata | string;
-  alt: string;
+  src: ImageMetadata | string
+  alt: string
   /** Tint painted over the desaturated image. Any CSS colour. */
-  tint?: string;
+  tint?: string
   /** Frame aspect ratio, e.g. "16 / 9". */
-  ratio?: string;
+  ratio?: string
   /** Makes the whole frame a link target. */
-  href?: string;
+  href?: string
   /** Accessible name for `href` when the caption isn't descriptive enough. */
-  linkLabel?: string;
+  linkLabel?: string
   /** Show true colours and the caption without waiting for a hover. */
-  revealed?: boolean;
+  revealed?: boolean
   /* Remote images can't be measured at build time, so Astro needs the
      intrinsic size up front; these are only used on the string branch. */
-  width?: number;
-  height?: number;
-  class?: string;
-  style?: string;
-  [key: string]: unknown;
+  width?: number
+  height?: number
+  class?: string
+  style?: string
+  [key: string]: unknown
 }
 
 const {
@@ -47,27 +47,23 @@ const {
   class: className,
   style: styleProp,
   ...rest
-} = Astro.props;
+} = Astro.props
 
-const isRemote = typeof src === "string";
-const hasCaption = Astro.slots.has("default");
+const isRemote = typeof src === 'string'
+const hasCaption = Astro.slots.has('default')
 
 /*
  * Merged rather than spread through `rest`, so a caller passing its own
  * `style` (to override one of the `--fi-*` knobs) doesn't silently drop the
  * declarations `tint`/`ratio` produced. Caller's wins, being last.
  */
-const style = [
-  tint && `--fi-tint: ${tint}`,
-  ratio && `--fi-ratio: ${ratio}`,
-  styleProp,
-]
+const style = [tint && `--fi-tint: ${tint}`, ratio && `--fi-ratio: ${ratio}`, styleProp]
   .filter(Boolean)
-  .join("; ");
+  .join('; ')
 ---
 
 <figure
-  class:list={["fi", className, { "fi--revealed": revealed }]}
+  class:list={['fi', className, { 'fi--revealed': revealed }]}
   style={style || undefined}
   {...rest}
 >
@@ -117,7 +113,7 @@ const style = [
    * is what makes it interpolate — an unregistered custom property would jump.
    */
   @property --fi-reveal {
-    syntax: "<number>";
+    syntax: '<number>';
     inherits: true;
     initial-value: 0;
   }
@@ -193,8 +189,7 @@ const style = [
     inset-block-end: 0;
     /* Deep top padding on purpose: it gives the gradient below somewhere to
        fade out that isn't on top of the text. */
-    padding: calc(var(--space-md, 1rem) * 2.5) var(--space-md, 1rem)
-      var(--space-md, 1rem);
+    padding: calc(var(--space-md, 1rem) * 2.5) var(--space-md, 1rem) var(--space-md, 1rem);
     color: var(--fi-caption-color);
     /* Translucent, not opaque: the point of the reveal is that the real
        colours stay visible behind the text. Full strength across the text
@@ -223,7 +218,7 @@ const style = [
   /* Stretched link: the anchor itself is a zero-size focus target, its
      ::after covers the frame so the whole picture is clickable. */
   .fi__link::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     z-index: 1;

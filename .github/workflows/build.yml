@@ -31,7 +31,7 @@ jobs:
         with:
           node_version: ${{ inputs.node_version }}
           pnpm_version: ${{ inputs.pnpm_version }}
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Sync types
         run: node scripts/sync-types.mjs

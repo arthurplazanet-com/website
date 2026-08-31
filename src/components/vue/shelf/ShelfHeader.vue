@@ -16,16 +16,16 @@
 </template>
 
 <script setup lang="ts">
-import { YHeader, YRow } from "@use-compose/ui";
-import DeckIcon from "./icons/DeckIcon.vue";
-import type { DeckIconName } from "./icons/paths";
-import "./ShelfHeader.css";
+import { YHeader, YRow } from '@use-compose/ui'
+import DeckIcon from './icons/DeckIcon.vue'
+import type { DeckIconName } from './icons/paths'
+import './ShelfHeader.css'
 
 // Blog and snippets are ordinary Astro routes, not books — one post and an
 // empty folder is nowhere near a section's worth.
 const LINKS: Array<{ href: string; label: string; icon: DeckIconName }> = [
-  { href: "/blog", label: "Blog", icon: "doc" },
-  { href: "/snippets", label: "Snippets", icon: "terminal" },
-  { href: "/cv.pdf", label: "CV", icon: "layers" },
-];
+  { href: '/blog', label: 'Blog', icon: 'doc' },
+  { href: '/snippets', label: 'Snippets', icon: 'terminal' },
+  { href: '/cv.pdf', label: 'CV', icon: 'layers' },
+]
 </script>

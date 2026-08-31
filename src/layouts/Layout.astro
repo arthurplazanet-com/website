@@ -1,18 +1,18 @@
 ---
-import { Font } from "astro:assets";
+import { Font } from 'astro:assets'
 
 // The site's only stylesheet: @use-compose/ui's CSS, the design tokens and the
 // document defaults, in that cascade order. Nothing imported it before, so the
 // library's components rendered their markup with none of the classes it ships
 // (`.card`, `.cluster`) and every `--space-*` in the layout primitives resolved
 // to nothing — which is what made the card list look unstyled.
-import "../assets/css/main.css";
+import '../assets/css/main.css'
 
 export interface Props {
-  title?: string;
+  title?: string
 }
 
-const { title = "Arthur Plazanet - Software Engineer" } = Astro.props;
+const { title = 'Arthur Plazanet - Software Engineer' } = Astro.props
 ---
 
 <!doctype html>

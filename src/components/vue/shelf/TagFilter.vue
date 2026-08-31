@@ -14,9 +14,7 @@
     />
 
     <YRow type="cluster" class="tag-filter__row">
-      <span class="tag-filter__label shelf-label">
-        <DeckIcon name="filter" />{{ title }}
-      </span>
+      <span class="tag-filter__label shelf-label"> <DeckIcon name="filter" />{{ title }} </span>
 
       <label
         v-for="tag in tags"
@@ -29,9 +27,7 @@
         >
       </label>
 
-      <button class="tag-filter__clear" type="reset">
-        <DeckIcon name="close" />Clear
-      </button>
+      <button class="tag-filter__clear" type="reset"><DeckIcon name="close" />Clear</button>
     </YRow>
 
     <!--
@@ -43,49 +39,49 @@
 </template>
 
 <script setup lang="ts">
-import { YChip, YRow } from "@use-compose/ui";
-import { computed, onMounted, ref } from "vue";
-import DeckIcon from "./icons/DeckIcon.vue";
-import "./TagFilter.css";
+import { YChip, YRow } from '@use-compose/ui'
+import { computed, onMounted, ref } from 'vue'
+import DeckIcon from './icons/DeckIcon.vue'
+import './TagFilter.css'
 
 const props = withDefaults(
   defineProps<{
     /** Unique per book, so two filters on one page never share an input id. */
-    scope: string;
-    tags: Array<{ label: string; count: number }>;
+    scope: string
+    tags: Array<{ label: string; count: number }>
     /** The class on each filterable record; it must carry `data-t`. */
-    target: string;
-    title?: string;
+    target: string
+    title?: string
   }>(),
-  { title: "Filter" },
-);
+  { title: 'Filter' }
+)
 
-const slug = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+const slug = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-')
 
 function defineRules() {
-  const book = `.book:has(.tag-filter__input:checked)`;
+  const book = `.book:has(.tag-filter__input:checked)`
   const restore = props.tags
     .map(
       (tag) =>
-        `.book:has(#${props.scope}-${slug(tag.label)}:checked) ${props.target}[data-t~="${slug(tag.label)}"]`,
+        `.book:has(#${props.scope}-${slug(tag.label)}:checked) ${props.target}[data-t~="${slug(tag.label)}"]`
     )
-    .join(",");
+    .join(',')
 
   return [
     `${book} ${props.target}{display:none}`,
-    restore ? `${restore}{display:flex}` : "",
+    restore ? `${restore}{display:flex}` : '',
     props.tags
       .map(
         (tag) =>
           `.book:has(#${props.scope}-${slug(tag.label)}:checked) .tag-filter__chip[for="${props.scope}-${slug(tag.label)}"] .y-chip` +
-          `{color:var(--primary);border-color:var(--primary);box-shadow:inset 0 -2px 0 var(--primary)}`,
+          `{color:var(--primary);border-color:var(--primary);box-shadow:inset 0 -2px 0 var(--primary)}`
       )
-      .join(""),
-  ].join("");
+      .join(''),
+  ].join('')
 }
 
-const rules = ref("");
+const rules = ref('')
 onMounted(() => {
-  rules.value = defineRules();
-});
+  rules.value = defineRules()
+})
 </script>

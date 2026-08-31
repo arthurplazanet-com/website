@@ -26,7 +26,7 @@ jobs:
         with:
           node_version: ${{ inputs.node_version }}
           pnpm_version: ${{ inputs.pnpm_version }}
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Lint
         run: pnpm lint
@@ -44,7 +44,7 @@ jobs:
         with:
           node_version: ${{ inputs.node_version }}
           pnpm_version: ${{ inputs.pnpm_version }}
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Format
         run: pnpm format

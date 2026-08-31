@@ -17,7 +17,7 @@
           :alt="project.title"
           loading="lazy"
           @error="brokenImage = true"
-        >
+        />
       </figure>
 
       <p class="deck-drawer-state" :data-live="project.live || undefined">
@@ -57,29 +57,32 @@
 </template>
 
 <script setup lang="ts">
-import { YChip, YModal, YRow } from "@use-compose/ui";
-import { computed, ref, watch } from "vue";
-import DeckIcon from "./icons/DeckIcon.vue";
-import type { DeckRecord } from "./records";
-import "./ProjectDrawer.css";
+import { YChip, YModal, YRow } from '@use-compose/ui'
+import { computed, ref, watch } from 'vue'
+import DeckIcon from './icons/DeckIcon.vue'
+import type { DeckRecord } from './records'
+import './ProjectDrawer.css'
 
 const props = defineProps<{
-  project: DeckRecord | null;
-  active: string[];
-}>();
+  project: DeckRecord | null
+  active: string[]
+}>()
 
-const emit = defineEmits<{ close: []; toggleTag: [tag: string] }>();
+const emit = defineEmits<{ close: []; toggleTag: [tag: string] }>()
 
 // A bad URL should collapse the figure, not leave a broken-image glyph sitting
 // in the middle of a layout with no rounded corners to hide behind.
-const brokenImage = ref(false);
-watch(() => props.project?.key, () => (brokenImage.value = false));
+const brokenImage = ref(false)
+watch(
+  () => props.project?.key,
+  () => (brokenImage.value = false)
+)
 
 // The drawer's own open state is derived: a project is selected, or it isn't.
 const open = computed({
   get: () => props.project !== null,
   set: (value: boolean) => {
-    if (!value) emit("close");
+    if (!value) emit('close')
   },
-});
+})
 </script>

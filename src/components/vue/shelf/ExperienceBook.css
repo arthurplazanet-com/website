@@ -1,8 +1,11 @@
 @layer components {
-  .experience { counter-reset: shown }
+  .experience {
+    counter-reset: shown;
+  }
 
-
-  .experience__list .y-timeline-item { counter-increment: shown }
+  .experience__list .y-timeline-item {
+    counter-increment: shown;
+  }
 
   /*
    * YTimelineItem renders its title through YHighlightedText, which paints
@@ -24,7 +27,9 @@
     background: var(--primary);
   }
 
-  .experience__list .y-timeline-description { display: block }
+  .experience__list .y-timeline-description {
+    display: block;
+  }
 
   .shelf-root.shelf-root .experience__list h3 {
     font-size: var(--text-lead);

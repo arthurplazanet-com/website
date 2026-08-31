@@ -13,7 +13,9 @@
     cursor: grab;
   }
 
-  .deck-rail:active { cursor: grabbing; }
+  .deck-rail:active {
+    cursor: grabbing;
+  }
 
   .deck-root:has(.deck-state:focus-visible) .deck-rail {
     outline: 2px solid var(--primary);
@@ -31,7 +33,9 @@
     pointer-events: none;
   }
 
-  .deck-viewport[data-dragging] .deck-rail-fill { opacity: 0.16; }
+  .deck-viewport[data-dragging] .deck-rail-fill {
+    opacity: 0.16;
+  }
 
   .deck-rail-head,
   .deck-rail-back,
@@ -83,7 +87,9 @@
     background: var(--bg-light);
   }
 
-  .deck-rail-index li[data-live] { color: var(--primary); }
+  .deck-rail-index li[data-live] {
+    color: var(--primary);
+  }
 
   .deck-dot {
     width: 4px;
@@ -105,7 +111,9 @@
     padding-bottom: 1.1rem;
     color: var(--deck-g2);
     cursor: pointer;
-    transition: background var(--deck-snap), color var(--deck-snap);
+    transition:
+      background var(--deck-snap),
+      color var(--deck-snap);
   }
 
   .deck-rail-act:hover {
@@ -113,14 +121,22 @@
     color: var(--primary);
   }
 
-  .deck-rail-act--back { display: none; }
+  .deck-rail-act--back {
+    display: none;
+  }
 
-  .deck-root:has(#deck-open:checked) .deck-rail-act--open { display: none; }
-  .deck-root:has(#deck-open:checked) .deck-rail-act--back { display: flex; }
+  .deck-root:has(#deck-open:checked) .deck-rail-act--open {
+    display: none;
+  }
+  .deck-root:has(#deck-open:checked) .deck-rail-act--back {
+    display: flex;
+  }
 
   /* the rail header is the destination label; once you are there, the same
      strip becomes the way out */
-  .deck-root:has(#deck-open:checked) .deck-rail-head { display: none; }
+  .deck-root:has(#deck-open:checked) .deck-rail-head {
+    display: none;
+  }
 
   .deck-rail-back {
     display: none;
@@ -138,7 +154,9 @@
     --deck-ico-size: 16px;
 
     pointer-events: none;
-    transition: background var(--deck-snap), color var(--deck-snap);
+    transition:
+      background var(--deck-snap),
+      color var(--deck-snap);
   }
 
   .deck-root:has(#deck-open:checked) .deck-rail-back {

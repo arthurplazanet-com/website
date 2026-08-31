@@ -5,8 +5,8 @@
 </template>
 
 <script setup lang="ts">
-import "./icons.css";
-import { PATHS, type DeckIconName } from "./paths";
+import './icons.css'
+import { PATHS, type DeckIconName } from './paths'
 
-defineProps<{ name: DeckIconName }>();
+defineProps<{ name: DeckIconName }>()
 </script>

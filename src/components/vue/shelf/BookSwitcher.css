@@ -67,18 +67,16 @@
   }
 
   /* the open book's spine is the one piece of gold in the rail */
-  .app:has(#book-id:checked) [data-book="book-id"],
-  .app:has(#book-projects:checked) [data-book="book-projects"],
-  .app:has(#book-experience:checked) [data-book="book-experience"] {
+  .app:has(#book-id:checked) [data-book='book-id'],
+  .app:has(#book-projects:checked) [data-book='book-projects'],
+  .app:has(#book-experience:checked) [data-book='book-experience'] {
     color: var(--bg);
     background: var(--primary);
   }
 
-  .app:has(#book-id:checked) [data-book="book-id"] .switcher__count,
-  .app:has(#book-projects:checked) [data-book="book-projects"] .switcher__count,
-  .app:has(#book-experience:checked)
-    [data-book="book-experience"]
-    .switcher__count {
+  .app:has(#book-id:checked) [data-book='book-id'] .switcher__count,
+  .app:has(#book-projects:checked) [data-book='book-projects'] .switcher__count,
+  .app:has(#book-experience:checked) [data-book='book-experience'] .switcher__count {
     color: rgb(0 0 0 / 55%);
   }
 

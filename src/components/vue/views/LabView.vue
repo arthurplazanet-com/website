@@ -40,13 +40,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import lampImg from "../../../assets/img/lab/lamp.png";
+import { ref } from 'vue'
+import lampImg from '../../../assets/img/lab/lamp.png'
 
 // First pass: prove out the click-to-reveal interaction and the card's
 // "float into place" motion. Real project thumbnails, exact positions and
 // a proper responsive layout come once this feels right.
-const revealed = ref(false);
+const revealed = ref(false)
 </script>
 
 <style scoped>
@@ -178,28 +178,18 @@ const revealed = ref(false);
 }
 
 .flag-gb::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background:
     linear-gradient(to bottom, transparent 40%, #fff 40% 60%, transparent 60%),
     linear-gradient(to right, transparent 40%, #fff 40% 60%, transparent 60%),
-    linear-gradient(
-      to bottom,
-      transparent 46%,
-      #cf142b 46% 54%,
-      transparent 54%
-    ),
+    linear-gradient(to bottom, transparent 46%, #cf142b 46% 54%, transparent 54%),
     linear-gradient(to right, transparent 46%, #cf142b 46% 54%, transparent 54%);
 }
 
 .flag-de {
-  background: linear-gradient(
-    to bottom,
-    #000 33%,
-    #dd0000 33% 66%,
-    #ffce00 66%
-  );
+  background: linear-gradient(to bottom, #000 33%, #dd0000 33% 66%, #ffce00 66%);
 }
 
 .reveal-panel {

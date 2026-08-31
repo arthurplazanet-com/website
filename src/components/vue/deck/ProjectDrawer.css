@@ -31,9 +31,17 @@
     color: var(--deck-g2);
   }
 
-  .deck-drawer-state[data-live] { color: var(--primary); }
-  .deck-drawer-state .deck-dot { width: 5px; height: 5px; background: currentcolor; }
-  .deck-drawer-state .deck-lab { margin-left: auto; }
+  .deck-drawer-state[data-live] {
+    color: var(--primary);
+  }
+  .deck-drawer-state .deck-dot {
+    width: 5px;
+    height: 5px;
+    background: currentcolor;
+  }
+  .deck-drawer-state .deck-lab {
+    margin-left: auto;
+  }
 
   .deck-drawer-body {
     max-width: 56ch;
@@ -43,7 +51,9 @@
     color: var(--deck-g1);
   }
 
-  .deck-drawer-tags { gap: 0.3rem; }
+  .deck-drawer-tags {
+    gap: 0.3rem;
+  }
 
   .deck-drawer-specs {
     padding-top: 0.4rem;

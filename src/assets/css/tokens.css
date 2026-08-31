@@ -58,9 +58,7 @@
   --text-sm: clamp(0.78rem, 0.72rem + 0.3vw, 0.95rem);
   --text-md: var(--font-scale-0, 1rem);
   --text-lg: var(--font-scale-2, 1.5rem);
-  --font-sans:
-    -apple-system, blinkmacsystemfont, "Segoe UI", roboto, helvetica, arial,
-    sans-serif;
+  --font-sans: -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, helvetica, arial, sans-serif;
 
   /* The two knobs the floating type tester turns (see FontTester.astro).
      Style headings/body through these instead of naming a face directly and

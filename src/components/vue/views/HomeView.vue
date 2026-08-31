@@ -5,11 +5,11 @@
 </template>
 
 <script setup lang="ts">
-import type { Project } from "../../../types/index.ts";
-import SiteShell from "./SiteShell.vue";
-import ProjectGrid from "../../../projects/components/ProjectGrid.vue";
+import type { Project } from '../../../types/index.ts'
+import SiteShell from './SiteShell.vue'
+import ProjectGrid from '../../../projects/components/ProjectGrid.vue'
 
 defineProps<{
-  projects?: Project[];
-}>();
+  projects?: Project[]
+}>()
 </script>

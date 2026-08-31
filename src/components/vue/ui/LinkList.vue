@@ -15,12 +15,12 @@
 // Structurally compatible with the generated `Link` type, declared locally on
 // purpose: nothing under `components/vue/` should ever import a domain type.
 const { links = [] } = defineProps<{
-  links?: Array<{ url: string; label: string }>;
-}>();
+  links?: Array<{ url: string; label: string }>
+}>()
 
 // Everything the API hands back points off-site, so the safe rel is the
 // default rather than something callers opt into.
-const isExternal = (url: string) => /^https?:\/\//i.test(url);
+const isExternal = (url: string) => /^https?:\/\//i.test(url)
 </script>
 
 <style scoped>

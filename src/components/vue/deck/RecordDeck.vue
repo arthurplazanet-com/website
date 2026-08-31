@@ -5,9 +5,7 @@
     </header>
 
     <YRow type="cluster" class="deck-filters">
-      <span class="deck-filters-label deck-lab">
-        <DeckIcon name="filter" />Tags
-      </span>
+      <span class="deck-filters-label deck-lab"> <DeckIcon name="filter" />Tags </span>
 
       <!-- multiple: selecting two tags widens the result, it does not narrow
            it. YChipGroup owns the selection; the cards just read it. -->
@@ -62,54 +60,54 @@
 </template>
 
 <script setup lang="ts">
-import { YChip, YChipGroup, YRow } from "@use-compose/ui";
-import { computed, onMounted, ref } from "vue";
-import DeckIcon from "./icons/DeckIcon.vue";
-import ProjectDrawer from "./ProjectDrawer.vue";
-import RecordCell from "./RecordCell.vue";
-import { SECTIONS, toRecord, type DeckRecord } from "./records";
-import "./RecordDeck.css";
-import type { Project } from "../../../types/index.ts";
+import { YChip, YChipGroup, YRow } from '@use-compose/ui'
+import { computed, onMounted, ref } from 'vue'
+import DeckIcon from './icons/DeckIcon.vue'
+import ProjectDrawer from './ProjectDrawer.vue'
+import RecordCell from './RecordCell.vue'
+import { SECTIONS, toRecord, type DeckRecord } from './records'
+import './RecordDeck.css'
+import type { Project } from '../../../types/index.ts'
 
-const props = defineProps<{ projects: Project[] }>();
+const props = defineProps<{ projects: Project[] }>()
 
-const active = ref<string[]>([]);
+const active = ref<string[]>([])
 
 /** Which record the drawer is showing. null closes it. */
-const opened = ref<DeckRecord | null>(null);
+const opened = ref<DeckRecord | null>(null)
 
-const mounted = ref(false);
-onMounted(() => (mounted.value = true));
+const mounted = ref(false)
+onMounted(() => (mounted.value = true))
 
 function toggle(tag: string) {
   active.value = active.value.includes(tag)
     ? active.value.filter((t) => t !== tag)
-    : [...active.value, tag];
+    : [...active.value, tag]
 }
 
-const records = computed(() => props.projects.map(toRecord));
+const records = computed(() => props.projects.map(toRecord))
 
 /** Frequency-sorted so the tags that actually narrow the list come first. */
 const tagCounts = computed(() => {
-  const counts = new Map<string, number>();
+  const counts = new Map<string, number>()
   for (const record of records.value)
-    for (const tag of record.tags) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+    for (const tag of record.tags) counts.set(tag, (counts.get(tag) ?? 0) + 1)
 
   return [...counts]
     .map(([label, count]) => ({ label, count }))
-    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
-});
+    .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label))
+})
 
 /** Selecting two tags widens the result, it does not narrow it — OR, not AND. */
 const matching = computed(() =>
   active.value.length
     ? records.value.filter((r) => r.tags.some((t) => active.value.includes(t)))
-    : records.value,
-);
+    : records.value
+)
 
-const shown = computed(() => matching.value.length);
+const shown = computed(() => matching.value.length)
 
 // The site sections ride the same lattice so the deck is the whole index,
 // not just the project list. They are never filtered out by a project tag.
-const visible = computed(() => [...matching.value, ...SECTIONS]);
+const visible = computed(() => [...matching.value, ...SECTIONS])
 </script>

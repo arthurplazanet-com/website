@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { YContainer } from "@use-compose/ui";
+import { YContainer } from '@use-compose/ui'
 </script>
 
 <style>

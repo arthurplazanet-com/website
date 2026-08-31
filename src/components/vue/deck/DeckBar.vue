@@ -28,39 +28,39 @@
     </span>
 
     <label class="deck-toolbar-btn">
-      <input v-model="gutters" type="checkbox" >
+      <input v-model="gutters" type="checkbox" />
       <span class="deck-toolbar-box" />Gutters
     </label>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
-import DeckIcon from "./icons/DeckIcon.vue";
-import "./DeckBar.css";
+import { onBeforeUnmount, onMounted, ref, watchEffect } from 'vue'
+import DeckIcon from './icons/DeckIcon.vue'
+import './DeckBar.css'
 
-defineProps<{ count: number }>();
+defineProps<{ count: number }>()
 
-const clock = ref("--:--");
-const gutters = ref(false);
-let timer: ReturnType<typeof setInterval> | undefined;
+const clock = ref('--:--')
+const gutters = ref(false)
+let timer: ReturnType<typeof setInterval> | undefined
 
 function tick() {
-  const now = new Date();
-  clock.value = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+  const now = new Date()
+  clock.value = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`
 }
 
 // The gutter switch is a presentation knob, so it sets one custom property and
 // lets CSS decide what a gutter means — no class plumbing through the tree.
 watchEffect(() => {
-  if (typeof document === "undefined") return;
-  document.documentElement.dataset.deckGutters = gutters.value ? "on" : "off";
-});
+  if (typeof document === 'undefined') return
+  document.documentElement.dataset.deckGutters = gutters.value ? 'on' : 'off'
+})
 
 onMounted(() => {
-  tick();
-  timer = setInterval(tick, 10_000);
-});
+  tick()
+  timer = setInterval(tick, 10_000)
+})
 
-onBeforeUnmount(() => clearInterval(timer));
+onBeforeUnmount(() => clearInterval(timer))
 </script>

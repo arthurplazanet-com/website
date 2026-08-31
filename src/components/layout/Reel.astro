@@ -4,20 +4,20 @@
 // styles live there; this component contributes the behaviour below — snap
 // stepping, drag-to-scroll and the optional position readout.
 interface Props {
-  class?: string;
+  class?: string
   /**
    * Show a "03 / 14" position readout under the reel. Off by default so the
    * primitive stays as thin as it was for any other use.
    */
-  counter?: boolean;
-  [key: string]: unknown;
+  counter?: boolean
+  [key: string]: unknown
 }
 
-const { class: className, counter = false, ...rest } = Astro.props;
+const { class: className, counter = false, ...rest } = Astro.props
 ---
 
 <div class="reel-shell">
-  <div class:list={["reel", className]} {...rest}>
+  <div class:list={['reel', className]} {...rest}>
     <slot />
   </div>
 
@@ -44,65 +44,65 @@ const { class: className, counter = false, ...rest } = Astro.props;
   // https://every-layout.dev/layouts/reel/ — toggle `.overflowing` only when
   // the reel is actually scrollable, so the scrollbar gutter doesn't appear
   // as dead space otherwise.
-  const reels = Array.from(document.querySelectorAll<HTMLElement>(".reel"));
+  const reels = Array.from(document.querySelectorAll<HTMLElement>('.reel'))
 
   const toggleOverflowClass = (elem: HTMLElement) => {
-    elem.classList.toggle("overflowing", elem.scrollWidth > elem.clientWidth);
-  };
+    elem.classList.toggle('overflowing', elem.scrollWidth > elem.clientWidth)
+  }
 
   for (const reel of reels) {
     // Anything that has to re-run when the reel's layout changes — cached
     // child offsets, the position readout. Registered further down as each
     // piece is set up, and run in registration order.
-    const layoutListeners: Array<() => void> = [];
+    const layoutListeners: Array<() => void> = []
     const onLayoutChange = (elem: HTMLElement) => {
-      toggleOverflowClass(elem);
-      for (const listener of layoutListeners) listener();
-    };
+      toggleOverflowClass(elem)
+      for (const listener of layoutListeners) listener()
+    }
 
     new ResizeObserver((entries) => {
-      onLayoutChange(entries[0].target as HTMLElement);
-    }).observe(reel);
+      onLayoutChange(entries[0].target as HTMLElement)
+    }).observe(reel)
 
     new MutationObserver((entries) => {
-      onLayoutChange(entries[0].target as HTMLElement);
-    }).observe(reel, { childList: true });
+      onLayoutChange(entries[0].target as HTMLElement)
+    }).observe(reel, { childList: true })
 
     /*
      * Offsets are cached: `base` already subtracts `scrollLeft`, so these are
      * content coordinates that only change when layout does, and recomputing
      * 14 rects on every scroll frame would be a needless thrash.
      */
-    let cachedPoints: number[] | null = null;
+    let cachedPoints: number[] | null = null
     const invalidatePoints = () => {
-      cachedPoints = null;
-    };
+      cachedPoints = null
+    }
 
     const snapPoints = () => {
-      if (cachedPoints) return cachedPoints;
-      const base = reel.getBoundingClientRect().left - reel.scrollLeft;
+      if (cachedPoints) return cachedPoints
+      const base = reel.getBoundingClientRect().left - reel.scrollLeft
       cachedPoints = Array.from(reel.children).map((child) =>
-        Math.round(child.getBoundingClientRect().left - base),
-      );
-      return cachedPoints;
-    };
+        Math.round(child.getBoundingClientRect().left - base)
+      )
+      return cachedPoints
+    }
 
     // First, so the readout below always recomputes against fresh offsets.
-    layoutListeners.push(invalidatePoints);
+    layoutListeners.push(invalidatePoints)
 
     const nearestPoint = () => {
-      const points = snapPoints();
-      let index = 0;
-      let best = Infinity;
+      const points = snapPoints()
+      let index = 0
+      let best = Infinity
       points.forEach((point, i) => {
-        const distance = Math.abs(point - reel.scrollLeft);
+        const distance = Math.abs(point - reel.scrollLeft)
         if (distance < best) {
-          best = distance;
-          index = i;
+          best = distance
+          index = i
         }
-      });
-      return { index, left: points[index] ?? 0, total: points.length };
-    };
+      })
+      return { index, left: points[index] ?? 0, total: points.length }
+    }
 
     /*
      * Move a whole image at a time rather than by raw pixel delta. The reel
@@ -112,26 +112,26 @@ const { class: className, counter = false, ...rest } = Astro.props;
      * leaves the reel apparently frozen. Stepping between snap points is what
      * the snap behaviour is for, and it gives a cleaner gallery feel anyway.
      */
-    let stepping = false;
+    let stepping = false
     const step = (direction: number) => {
-      const points = snapPoints();
-      const current = reel.scrollLeft;
+      const points = snapPoints()
+      const current = reel.scrollLeft
       const target =
         direction > 0
           ? points.find((p) => p > current + 1)
-          : [...points].reverse().find((p) => p < current - 1);
+          : [...points].reverse().find((p) => p < current - 1)
 
-      if (target === undefined) return false;
+      if (target === undefined) return false
 
-      stepping = true;
-      reel.scrollTo({ left: target, behavior: "smooth" });
+      stepping = true
+      reel.scrollTo({ left: target, behavior: 'smooth' })
       // A trackpad flick fires many wheel events; without this one gesture
       // would rip through half the reel.
       window.setTimeout(() => {
-        stepping = false;
-      }, 320);
-      return true;
-    };
+        stepping = false
+      }, 320)
+      return true
+    }
 
     // How many images vertical scrolling may advance before the page takes its
     // input back. Holding the page hostage until the reel was exhausted meant
@@ -139,19 +139,19 @@ const { class: className, counter = false, ...rest } = Astro.props;
     // move on, which reads as a broken page rather than as a gallery. Three is
     // enough to make the reel's existence obvious; everything past that is
     // reachable by deliberate horizontal gesture, drag, or the arrow keys.
-    const STEP_BUDGET = 3;
-    let budget = STEP_BUDGET;
+    const STEP_BUDGET = 3
+    let budget = STEP_BUDGET
 
     // Re-arm once the reel has been scrolled away from, so returning to the
     // gallery later behaves the same as arriving at it the first time.
     new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) budget = STEP_BUDGET;
+          if (!entry.isIntersecting) budget = STEP_BUDGET
         }
       },
-      { threshold: 0 },
-    ).observe(reel);
+      { threshold: 0 }
+    ).observe(reel)
 
     /*
      * Vertical wheel/trackpad input over the reel drives it horizontally
@@ -161,84 +161,80 @@ const { class: className, counter = false, ...rest } = Astro.props;
      * rather than absolute, per `STEP_BUDGET` above.
      */
     reel.addEventListener(
-      "wheel",
+      'wheel',
       (event) => {
-        const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY);
-        const delta = horizontal ? event.deltaX : event.deltaY;
-        if (delta === 0) return;
+        const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY)
+        const delta = horizontal ? event.deltaX : event.deltaY
+        if (delta === 0) return
 
-        const atStart = reel.scrollLeft <= 0;
-        const atEnd =
-          reel.scrollLeft + reel.clientWidth >= reel.scrollWidth - 1;
+        const atStart = reel.scrollLeft <= 0
+        const atEnd = reel.scrollLeft + reel.clientWidth >= reel.scrollWidth - 1
 
-        if ((delta > 0 && atEnd) || (delta < 0 && atStart)) return;
+        if ((delta > 0 && atEnd) || (delta < 0 && atStart)) return
 
         // A sideways gesture is the user explicitly driving the reel, so it
         // always works and never counts against the budget — only vertical
         // input is being borrowed from the page.
-        if (!horizontal && budget <= 0) return;
+        if (!horizontal && budget <= 0) return
 
-        event.preventDefault();
+        event.preventDefault()
 
-        if (stepping) return;
-        if (step(Math.sign(delta)) && !horizontal) budget -= 1;
+        if (stepping) return
+        if (step(Math.sign(delta)) && !horizontal) budget -= 1
       },
-      { passive: false },
-    );
+      { passive: false }
+    )
 
     /*
      * Click-and-drag. Touch already scrolls the reel natively, so this is for
      * mouse and pen only — claiming touch pointers here would just fight the
      * platform's own momentum scrolling.
      */
-    let dragging = false;
-    let dragMoved = false;
-    let dragOriginX = 0;
-    let dragOriginScroll = 0;
+    let dragging = false
+    let dragMoved = false
+    let dragOriginX = 0
+    let dragOriginScroll = 0
 
-    reel.addEventListener("pointerdown", (event) => {
-      if (event.pointerType === "touch" || event.button !== 0) return;
-      if ((event.target as HTMLElement).closest("a, button, input, label"))
-        return;
+    reel.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'touch' || event.button !== 0) return
+      if ((event.target as HTMLElement).closest('a, button, input, label')) return
 
-      dragging = true;
-      dragMoved = false;
-      dragOriginX = event.clientX;
-      dragOriginScroll = reel.scrollLeft;
+      dragging = true
+      dragMoved = false
+      dragOriginX = event.clientX
+      dragOriginScroll = reel.scrollLeft
       // Snap fights imperative `scrollLeft` writes the same way it does in the
       // wheel handler above, so it comes off for the duration of the drag and
       // the release settles onto a point explicitly.
-      reel.style.scrollSnapType = "none";
-      reel.classList.add("is-dragging");
-      reel.setPointerCapture(event.pointerId);
-    });
+      reel.style.scrollSnapType = 'none'
+      reel.classList.add('is-dragging')
+      reel.setPointerCapture(event.pointerId)
+    })
 
-    reel.addEventListener("pointermove", (event) => {
-      if (!dragging) return;
-      const moved = event.clientX - dragOriginX;
-      if (Math.abs(moved) > 3) dragMoved = true;
-      reel.scrollLeft = dragOriginScroll - moved;
-    });
+    reel.addEventListener('pointermove', (event) => {
+      if (!dragging) return
+      const moved = event.clientX - dragOriginX
+      if (Math.abs(moved) > 3) dragMoved = true
+      reel.scrollLeft = dragOriginScroll - moved
+    })
 
     const endDrag = (event: PointerEvent) => {
-      if (!dragging) return;
-      dragging = false;
-      reel.classList.remove("is-dragging");
-      reel.style.scrollSnapType = "";
-      if (reel.hasPointerCapture(event.pointerId))
-        reel.releasePointerCapture(event.pointerId);
+      if (!dragging) return
+      dragging = false
+      reel.classList.remove('is-dragging')
+      reel.style.scrollSnapType = ''
+      if (reel.hasPointerCapture(event.pointerId)) reel.releasePointerCapture(event.pointerId)
       // Settle deliberately rather than hoping `proximity` decides to catch it.
-      if (dragMoved)
-        reel.scrollTo({ left: nearestPoint().left, behavior: "smooth" });
-    };
+      if (dragMoved) reel.scrollTo({ left: nearestPoint().left, behavior: 'smooth' })
+    }
 
-    reel.addEventListener("pointerup", endDrag);
-    reel.addEventListener("pointercancel", endDrag);
+    reel.addEventListener('pointerup', endDrag)
+    reel.addEventListener('pointercancel', endDrag)
 
     // Browsers start a native image drag otherwise, which kills the gesture.
-    reel.addEventListener("dragstart", (event) => {
-      if (dragging) event.preventDefault();
-    });
+    reel.addEventListener('dragstart', (event) => {
+      if (dragging) event.preventDefault()
+    })
 
     /*
      * Swallow the click that follows a real drag, so that anything clickable
@@ -246,44 +242,44 @@ const { class: className, counter = false, ...rest } = Astro.props;
      * scrolling. Capture phase, to get in before any such handler.
      */
     reel.addEventListener(
-      "click",
+      'click',
       (event) => {
-        if (!dragMoved) return;
-        event.preventDefault();
-        event.stopPropagation();
-        dragMoved = false;
+        if (!dragMoved) return
+        event.preventDefault()
+        event.stopPropagation()
+        dragMoved = false
       },
-      true,
-    );
+      true
+    )
 
     // "03 / 14" readout, if this reel asked for one.
-    const shell = reel.closest(".reel-shell");
-    const indexEl = shell?.querySelector<HTMLElement>("[data-reel-index]");
-    const totalEl = shell?.querySelector<HTMLElement>("[data-reel-total]");
+    const shell = reel.closest('.reel-shell')
+    const indexEl = shell?.querySelector<HTMLElement>('[data-reel-index]')
+    const totalEl = shell?.querySelector<HTMLElement>('[data-reel-total]')
 
     if (indexEl && totalEl) {
-      const pad = (n: number) => String(n).padStart(2, "0");
-      let queued = false;
+      const pad = (n: number) => String(n).padStart(2, '0')
+      let queued = false
 
       const updateCounter = () => {
-        queued = false;
-        const { index, total } = nearestPoint();
-        indexEl.textContent = pad(index + 1);
-        totalEl.textContent = pad(total);
-      };
+        queued = false
+        const { index, total } = nearestPoint()
+        indexEl.textContent = pad(index + 1)
+        totalEl.textContent = pad(total)
+      }
 
       reel.addEventListener(
-        "scroll",
+        'scroll',
         () => {
-          if (queued) return;
-          queued = true;
-          requestAnimationFrame(updateCounter);
+          if (queued) return
+          queued = true
+          requestAnimationFrame(updateCounter)
         },
-        { passive: true },
-      );
+        { passive: true }
+      )
 
-      updateCounter();
-      layoutListeners.push(updateCounter);
+      updateCounter()
+      layoutListeners.push(updateCounter)
     }
   }
 </script>

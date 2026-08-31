@@ -37,15 +37,11 @@
           <div class="author">by Anne Frank</div>
           <div class="body">
             <p>
-              also known as The Diary of Anne Frank, is a book of the writings
-              from the Dutch-language diary kept by Anne Frank while she was in
-              hiding for two years with her family during the Nazi occupation of
-              the Netherlands
+              also known as The Diary of Anne Frank, is a book of the writings from the
+              Dutch-language diary kept by Anne Frank while she was in hiding for two years with her
+              family during the Nazi occupation of the Netherlands
             </p>
-            <p>
-              Anne calls her diary "Kitty", so almost all of the letters are
-              written to Kitty.
-            </p>
+            <p>Anne calls her diary "Kitty", so almost all of the letters are written to Kitty.</p>
           </div>
         </div>
       </div>
@@ -89,7 +85,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 12px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     z-index: 6;
   }
@@ -132,8 +128,7 @@
     position: absolute;
     top: 430px;
     left: 222px;
-    transform: translateY(-15px) translateX(0px) translateZ(15px)
-      rotateX(104deg);
+    transform: translateY(-15px) translateX(0px) translateZ(15px) rotateX(104deg);
   }
 
   .book-cover:hover {
@@ -159,13 +154,13 @@
     }
 
     .title {
-      font-family: "Quicksand", sans-serif;
+      font-family: 'Quicksand', sans-serif;
       font-size: 26px;
       margin-bottom: 10px;
     }
 
     .author {
-      font-family: "Open Sans", sans-serif;
+      font-family: 'Open Sans', sans-serif;
       font-style: italic;
       margin-bottom: 20px;
     }
@@ -176,7 +171,7 @@
     }
 
     .body {
-      font-family: "Quicksand", sans-serif;
+      font-family: 'Quicksand', sans-serif;
     }
 
     .body p:first-child {

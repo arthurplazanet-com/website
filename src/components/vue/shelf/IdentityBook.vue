@@ -15,8 +15,8 @@
 
         <YWrapper>
           <p class="id__prose">
-            Design systems, component libraries and the build plumbing under them —
-            Vue and Nuxt on the front, AdonisJS and GitHub Actions behind it.
+            Design systems, component libraries and the build plumbing under them — Vue and Nuxt on
+            the front, AdonisJS and GitHub Actions behind it.
           </p>
         </YWrapper>
 
@@ -48,18 +48,18 @@
 </template>
 
 <script setup lang="ts">
-import { YHighlightedText, YRow, YStack, YWrapper } from "@use-compose/ui";
-import DeckIcon from "./icons/DeckIcon.vue";
-import "./IdentityBook.css";
+import { YHighlightedText, YRow, YStack, YWrapper } from '@use-compose/ui'
+import DeckIcon from './icons/DeckIcon.vue'
+import './IdentityBook.css'
 
 defineProps<{
-  books: Array<{ id: string; no: string; name: string; count: number | string }>;
-}>();
+  books: Array<{ id: string; no: string; name: string; count: number | string }>
+}>()
 
 const FACTS: Array<[string, string]> = [
-  ["Front", "Vue 3 · Nuxt 4 · Astro 6"],
-  ["Back", "AdonisJS 6 · Node 22"],
-  ["Ops", "GitHub Actions · rsync"],
-  ["Tooling", "pnpm · Renovate · Vite"],
-];
+  ['Front', 'Vue 3 · Nuxt 4 · Astro 6'],
+  ['Back', 'AdonisJS 6 · Node 22'],
+  ['Ops', 'GitHub Actions · rsync'],
+  ['Tooling', 'pnpm · Renovate · Vite'],
+]
 </script>

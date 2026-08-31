@@ -1,5 +1,7 @@
 @layer components {
-  .projects { counter-reset: shown }
+  .projects {
+    counter-reset: shown;
+  }
 
   /* the count comes back out of a CSS counter: hidden cells do not increment,
      so it stays true without anyone recomputing it */
@@ -19,7 +21,13 @@
   }
 
   @keyframes cell-in {
-    from { opacity: 0; transform: translateY(10px) }
-    to { opacity: 1; transform: none }
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 }

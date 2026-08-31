@@ -5,9 +5,12 @@
     role="button"
     @click="emit('open')"
     @keydown.enter="emit('open')"
-    @keydown.space.prevent="emit('open')" :class="{ 'deck-cell--section': section }" tabindex="0">
+    @keydown.space.prevent="emit('open')"
+    :class="{ 'deck-cell--section': section }"
+    tabindex="0"
+  >
     <div class="deck-cell-top">
-      <span class="deck-lab">{{ section ? "Section" : `Rec ${index}` }}</span>
+      <span class="deck-lab">{{ section ? 'Section' : `Rec ${index}` }}</span>
       <span v-if="!section" class="deck-cell-state" :data-live="live || undefined">
         <i class="deck-dot" />{{ status }}
       </span>
@@ -50,34 +53,32 @@
       </p>
     </div>
 
-    <span v-else class="deck-cell-arrow">
-      Open <DeckIcon name="arrow" />
-    </span>
+    <span v-else class="deck-cell-arrow"> Open <DeckIcon name="arrow" /> </span>
   </YCard>
 </template>
 
 <script setup lang="ts">
-import { YCard, YChip, YRow } from "@use-compose/ui";
-import DeckIcon from "./icons/DeckIcon.vue";
-import type { DeckIconName } from "./icons/paths";
-import "./RecordCell.css";
+import { YCard, YChip, YRow } from '@use-compose/ui'
+import DeckIcon from './icons/DeckIcon.vue'
+import type { DeckIconName } from './icons/paths'
+import './RecordCell.css'
 
 withDefaults(
   defineProps<{
-    index?: string;
-    title: string;
-    description: string;
-    tags?: string[];
-    active?: string[];
-    status?: string;
-    live?: boolean;
-    specs?: Array<[string, string]>;
-    links?: Array<{ url: string; label: string; icon: DeckIconName }>;
-    section?: boolean;
-    icon?: DeckIconName;
+    index?: string
+    title: string
+    description: string
+    tags?: string[]
+    active?: string[]
+    status?: string
+    live?: boolean
+    specs?: Array<[string, string]>
+    links?: Array<{ url: string; label: string; icon: DeckIconName }>
+    section?: boolean
+    icon?: DeckIconName
   }>(),
-  { tags: () => [], active: () => [], specs: () => [], links: () => [] },
-);
+  { tags: () => [], active: () => [], specs: () => [], links: () => [] }
+)
 
-const emit = defineEmits<{ toggleTag: [tag: string]; open: [] }>();
+const emit = defineEmits<{ toggleTag: [tag: string]; open: [] }>()
 </script>

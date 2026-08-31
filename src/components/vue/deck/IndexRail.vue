@@ -4,9 +4,7 @@
          not a state indicator, so it must not linger once the panel lands -->
     <span class="deck-rail-fill" aria-hidden="true" />
 
-    <p class="deck-rail-head">
-      02<b>Projects</b>
-    </p>
+    <p class="deck-rail-head">02<b>Projects</b></p>
 
     <!-- In flow, so the index below it is never covered. It is only the visual;
          the label underneath is what actually takes the click. -->
@@ -17,7 +15,7 @@
 
     <ol class="deck-rail-index">
       <li v-for="(record, i) in records" :key="record.id" :data-live="record.live || undefined">
-        <i class="deck-dot" />{{ String(i + 1).padStart(2, "0") }}
+        <i class="deck-dot" />{{ String(i + 1).padStart(2, '0') }}
       </li>
     </ol>
 
@@ -38,15 +36,15 @@
 </template>
 
 <script setup lang="ts">
-import { YVerticalTitle } from "@use-compose/ui";
-import { useTemplateRef } from "vue";
-import DeckIcon from "./icons/DeckIcon.vue";
-import "./IndexRail.css";
+import { YVerticalTitle } from '@use-compose/ui'
+import { useTemplateRef } from 'vue'
+import DeckIcon from './icons/DeckIcon.vue'
+import './IndexRail.css'
 
 defineProps<{
-  records: Array<{ id: string; live?: boolean }>;
-}>();
+  records: Array<{ id: string; live?: boolean }>
+}>()
 
 // The parent drives the drag; it needs the element, not a copy of the state.
-defineExpose({ el: useTemplateRef("rail") });
+defineExpose({ el: useTemplateRef('rail') })
 </script>

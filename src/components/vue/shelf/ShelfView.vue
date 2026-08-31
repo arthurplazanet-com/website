@@ -15,54 +15,54 @@
 </template>
 
 <script setup lang="ts">
-import { AppCompose, YScreen } from "@use-compose/ui";
-import type { YTheme } from "@use-compose/ui";
-import { computed, onBeforeUnmount, onMounted, useTemplateRef } from "vue";
-import BookSwitcher from "./BookSwitcher.vue";
-import ExperienceBook from "./ExperienceBook.vue";
-import IdentityBook from "./IdentityBook.vue";
-import ProjectsBook from "./ProjectsBook.vue";
-import ShelfHeader from "./ShelfHeader.vue";
-import "./type.css";
-import "./shelf.css";
-import type { Experience, Project } from "../../../types/index.ts";
+import { AppCompose, YScreen } from '@use-compose/ui'
+import type { YTheme } from '@use-compose/ui'
+import { computed, onBeforeUnmount, onMounted, useTemplateRef } from 'vue'
+import BookSwitcher from './BookSwitcher.vue'
+import ExperienceBook from './ExperienceBook.vue'
+import IdentityBook from './IdentityBook.vue'
+import ProjectsBook from './ProjectsBook.vue'
+import ShelfHeader from './ShelfHeader.vue'
+import './type.css'
+import './shelf.css'
+import type { Experience, Project } from '../../../types/index.ts'
 
-const props = withDefaults(
-  defineProps<{ projects?: Project[]; experiences?: Experience[] }>(),
-  { projects: () => [], experiences: () => [] },
-);
+const props = withDefaults(defineProps<{ projects?: Project[]; experiences?: Experience[] }>(), {
+  projects: () => [],
+  experiences: () => [],
+})
 
 // Mirrors assets/css/tokens.css, which stays the source of truth for anything
 // CSS reads directly. Compose derives its own ramps from these at runtime.
 const theme: YTheme = {
-  primary: "#e3c567",
-  secondary: "#1c1b1b",
-  background: "#000000",
-  dark: "#1c1b1b",
-  danger: "#f96e46",
-  text: "#fefefe",
-};
+  primary: '#e3c567',
+  secondary: '#1c1b1b',
+  background: '#000000',
+  dark: '#1c1b1b',
+  danger: '#f96e46',
+  text: '#fefefe',
+}
 
-const ORDER = ["book-id", "book-projects", "book-experience"] as const;
+const ORDER = ['book-id', 'book-projects', 'book-experience'] as const
 
 const books = computed(() => [
-  { id: "book-id", no: "01", name: "Identity", count: "—" },
+  { id: 'book-id', no: '01', name: 'Identity', count: '—' },
   {
-    id: "book-projects",
-    no: "02",
-    name: "Projects",
+    id: 'book-projects',
+    no: '02',
+    name: 'Projects',
     count: props.projects.length,
   },
   {
-    id: "book-experience",
-    no: "03",
-    name: "Experience",
+    id: 'book-experience',
+    no: '03',
+    name: 'Experience',
     count: props.experiences.length,
   },
-]);
+])
 
-const stage = useTemplateRef<HTMLElement>("stage");
-const switcher = useTemplateRef<{ el: HTMLElement | null }>("switcher");
+const stage = useTemplateRef<HTMLElement>('stage')
+const switcher = useTemplateRef<{ el: HTMLElement | null }>('switcher')
 
 /**
  * Drag is pure enhancement: it moves to the neighbouring book and hands the

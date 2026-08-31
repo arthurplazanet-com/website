@@ -14,4 +14,4 @@ minimumReleaseAgeExclude:
   - '@use-compose/ui@0.10.1 || 0.10.2 || 1.2.0'
 
 overrides:
-  vue: "catalog:"
+  vue: 'catalog:'

@@ -1,10 +1,5 @@
 <template>
-  <svg
-    class="kepla-icon"
-    viewBox="0 0 3200 3200"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg class="kepla-icon" viewBox="0 0 3200 3200" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect
       x="21"
       y="21"

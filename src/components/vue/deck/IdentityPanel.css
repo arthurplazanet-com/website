@@ -90,7 +90,9 @@
     transition: background var(--deck-snap);
   }
 
-  .deck-index li:not(.deck-index-head):hover { background: var(--deck-raise); }
+  .deck-index li:not(.deck-index-head):hover {
+    background: var(--deck-raise);
+  }
 
   .deck-index b {
     font-weight: 400;
@@ -124,17 +126,27 @@
     color: var(--deck-g1);
   }
 
-  .deck-index-state[data-live] { color: var(--primary); }
-  .deck-index-state .deck-dot { width: 5px; height: 5px; background: currentcolor; }
+  .deck-index-state[data-live] {
+    color: var(--primary);
+  }
+  .deck-index-state .deck-dot {
+    width: 5px;
+    height: 5px;
+    background: currentcolor;
+  }
 
-  .deck-facts { margin: 0; }
+  .deck-facts {
+    margin: 0;
+  }
 
   .deck-facts > div {
     padding: 0.55rem 0.7rem;
     background: var(--bg-light);
   }
 
-  .deck-facts dt { margin: 0 0 0.3rem; }
+  .deck-facts dt {
+    margin: 0 0 0.3rem;
+  }
 
   .deck-facts dd {
     margin: 0;
@@ -161,7 +173,9 @@
     color: var(--text);
     text-decoration: none;
     border-bottom: 1px solid transparent;
-    transition: color var(--deck-snap), border-color var(--deck-snap);
+    transition:
+      color var(--deck-snap),
+      border-color var(--deck-snap);
   }
 
   .deck-id-foot a:hover {
@@ -170,7 +184,11 @@
   }
 
   @media (width <= 720px) {
-    .deck-id { gap: 0.9rem; }
-    .deck-index { display: none; }
+    .deck-id {
+      gap: 0.9rem;
+    }
+    .deck-index {
+      display: none;
+    }
   }
 }

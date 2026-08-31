@@ -28,7 +28,9 @@
   }
 
   /* the label is the control, so it carries the hit area and the focus ring */
-  .tag-filter__chip { cursor: pointer }
+  .tag-filter__chip {
+    cursor: pointer;
+  }
 
   .tag-filter__input:focus-visible + .tag-filter__row .tag-filter__chip,
   .tag-filter__chip:focus-within {
