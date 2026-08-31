@@ -1,0 +1,22 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SnippetsView from "../../components/vue/views/SnippetsView.vue";
+import type { Snippet } from "../../types/index.ts";
+
+// A dead API shouldn't take the build down with it — the list renders its own
+// empty state, so fall back to nothing and keep going.
+let snippets: Snippet[] = [];
+try {
+  const response = await fetch(
+    `${import.meta.env.PUBLIC_API_URL}/content/snippets`,
+  );
+  const data = response.ok ? await response.json() : [];
+  snippets = Array.isArray(data) ? data : [];
+} catch (error) {
+  console.warn("[snippets/index] could not load snippets:", error);
+}
+---
+
+<Layout title="Snippets - Arthur Plazanet">
+  <SnippetsView client:load snippets={snippets} />
+</Layout>

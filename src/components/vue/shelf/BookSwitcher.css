@@ -1,0 +1,129 @@
+@layer components {
+  .switcher {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--shelf-g3);
+    border-inline-start: 1px solid var(--shelf-g3);
+    cursor: grab;
+    touch-action: pan-y;
+  }
+
+  .switcher:active {
+    cursor: grabbing;
+  }
+
+  .switcher__spine {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    gap: 0.9rem;
+    align-items: center;
+    justify-content: center;
+    padding-block: 1rem;
+    color: var(--shelf-g2);
+    cursor: pointer;
+    background: var(--bg-light);
+    transition:
+      background var(--snap),
+      color var(--snap);
+  }
+
+  .switcher__spine:hover {
+    color: var(--text);
+    background: var(--shelf-raise);
+  }
+
+  .switcher__no,
+  .switcher__count {
+    font-size: var(--text-label);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .switcher__count {
+    color: var(--shelf-g2);
+  }
+
+  /*
+   * YVerticalTitle turns vertical only at >=768px and carries its own padding
+   * (up to 58px) and font size (up to 3.4rem) — both far too big for a rail
+   * this narrow, and its gotham family does not exist on this site.
+   */
+  .switcher .y-vertical-title {
+    display: block;
+    flex: none;
+    min-block-size: 0;
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-title);
+    font-size: var(--text-label);
+    font-weight: 400;
+    letter-spacing: 0.26em;
+    text-align: center;
+    text-transform: uppercase;
+    color: inherit;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+
+  /* the open book's spine is the one piece of gold in the rail */
+  .app:has(#book-id:checked) [data-book="book-id"],
+  .app:has(#book-projects:checked) [data-book="book-projects"],
+  .app:has(#book-experience:checked) [data-book="book-experience"] {
+    color: var(--bg);
+    background: var(--primary);
+  }
+
+  .app:has(#book-id:checked) [data-book="book-id"] .switcher__count,
+  .app:has(#book-projects:checked) [data-book="book-projects"] .switcher__count,
+  .app:has(#book-experience:checked)
+    [data-book="book-experience"]
+    .switcher__count {
+    color: rgb(0 0 0 / 55%);
+  }
+
+  .app:has(.shelf-state:focus-visible) .switcher {
+    outline: 2px solid var(--primary);
+    outline-offset: -2px;
+  }
+}
+.app:has(#book-id:checked) {
+  .book--id {
+    z-index: 3;
+  }
+
+  .book-projects {
+    z-index: 1;
+  }
+
+  .book-experience {
+    z-index: 1;
+  }
+}
+
+.app:has(#book-projects:checked) {
+  .book--id {
+    z-index: 1;
+  }
+
+  .book-projects {
+    z-index: 3;
+  }
+
+  .book-experience {
+    z-index: 1;
+  }
+}
+
+.app:has(#book-experience:checked) {
+  .book-experience {
+    z-index: 3;
+  }
+  .book--id {
+    z-index: 1;
+  }
+
+  .book-projects {
+    z-index: 1;
+  }
+}

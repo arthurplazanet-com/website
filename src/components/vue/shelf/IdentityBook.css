@@ -1,0 +1,122 @@
+@layer components {
+  .id__body {
+    flex: 1 1 auto;
+    gap: 1rem;
+  }
+
+  .shelf-root.shelf-root .id h1 em {
+    display: block;
+    font-style: normal;
+    color: var(--shelf-g1);
+  }
+
+  .id__lead {
+    font-size: var(--text-lead);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  /*
+   * YHighlightedText paints `color: var(--color-bg)` over a
+   * `--theme-current-color` background. When that variable does not resolve
+   * you get black text on nothing, which on a black page is nothing at all.
+   * Naming both ends is also just what this design wants.
+   */
+  .id__lead > span {
+    padding: 0.15em 0.35em;
+    color: var(--black);
+    background: var(--primary);
+    background-image: none;
+  }
+
+  .id .y-wrapper {
+    margin-inline: 0;
+  }
+
+  .id__prose {
+    max-inline-size: 60ch;
+    color: var(--shelf-g1);
+  }
+
+  .id__facts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
+    gap: 1px;
+    margin: 0;
+    background: var(--shelf-g3);
+    border: 1px solid var(--shelf-g3);
+  }
+
+  .id__facts > div {
+    padding: 0.6rem 0.8rem;
+    background: var(--bg-light);
+  }
+
+  .id__facts dt {
+    margin-block-end: 0.3rem;
+  }
+
+  .id__facts dd {
+    margin: 0;
+    font-size: var(--text-label);
+    color: var(--shelf-g1);
+  }
+
+  .id__index {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-block-start: 1px solid var(--shelf-g3);
+  }
+
+  .id__index li {
+    display: grid;
+    grid-template-columns: 2.6rem minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.45rem 0.1rem;
+    border-block-end: 1px solid var(--shelf-g3);
+    transition: background var(--snap);
+  }
+
+  .id__index li:hover {
+    background: var(--shelf-raise);
+  }
+
+  .id__index b {
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    color: var(--shelf-g2);
+  }
+
+  .id__index-name {
+    color: var(--text);
+  }
+
+  .id__links {
+    gap: 0 1.6rem;
+    margin-top: auto;
+    border-top: 2px solid grey;
+  }
+
+  .id__links a {
+    display: inline-flex;
+    gap: 0.45rem;
+    align-items: center;
+    padding-block: 0.25rem;
+    font-size: var(--text-label);
+    color: var(--text);
+    text-decoration: none;
+    border-block-end: 1px solid transparent;
+    transition:
+      color var(--snap),
+      border-color var(--snap);
+  }
+
+  .id__links a:hover {
+    color: var(--primary);
+    border-block-end-color: var(--primary);
+  }
+}

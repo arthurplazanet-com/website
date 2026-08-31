@@ -1,0 +1,68 @@
+@layer components {
+  /* the shelf owns 100svh, so a fixed header would float over the books */
+  .shelf-header.y-header.y-header-fixed {
+    position: static;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem var(--pad);
+    background: var(--bg-light);
+    border-block-end: 1px solid var(--shelf-g3);
+  }
+
+  .shelf-header__mark {
+    font-family: var(--font-title);
+    font-size: var(--text-lead);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .shelf-header__links { gap: 0 1.4rem }
+
+  .shelf-header__links a {
+    display: inline-flex;
+    gap: 0.45rem;
+    align-items: center;
+    padding-block: 0.25rem;
+    font-size: var(--text-label);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--shelf-g1);
+    text-decoration: none;
+    border-block-end: 1px solid transparent;
+    transition: color var(--snap), border-color var(--snap);
+  }
+
+  .shelf-header__links a:hover {
+    color: var(--primary);
+    border-block-end-color: var(--primary);
+  }
+
+  .shelf-header__status {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: var(--text-label);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--shelf-g1);
+  }
+
+  .shelf-header__status .shelf-dot {
+    background: var(--primary);
+    animation: shelf-blip 2.6s steps(1, end) infinite;
+  }
+
+  @keyframes shelf-blip {
+    0%, 70% { opacity: 1 }
+    71%, 100% { opacity: 0.25 }
+  }
+
+  @media (width <= 720px) {
+    .shelf-header__status { display: none }
+  }
+}

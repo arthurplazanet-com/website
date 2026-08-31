@@ -9,29 +9,35 @@
     "preview": "astro preview",
     "astro": "astro",
     "sync-types": "node scripts/sync-types.mjs",
+    "sync-blog": "node scripts/sync-blog-to-api.mjs",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.4",
     "@astrojs/vue": "^6.0.0",
-    "@use-compose/ui": "0.8.1",
+    "@nanostores/vue": "^1.1.0",
+    "@use-compose/ui": "1.2.0",
     "astro": "^6.0.0",
-    "vue": "^3.5.28"
-  },
-  "pnpm": {
-    "overrides": {
-      "vue": "$vue"
-    }
+    "nanostores": "^1.5.2",
+    "vue": "catalog:"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^8.56.0",
     "eslint": "^10.0.1",
     "eslint-plugin-astro": "^1.6.0",
+    "gray-matter": "^4.0.3",
     "prettier": "3.9.6",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
+    "rehype-raw": "^7.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
     "stylelint": "^17.3.0",
-    "stylelint-config-standard": "^40.0.0"
-  }
+    "stylelint-config-standard": "^40.0.0",
+    "unified": "^11.0.5"
+  },
+  "overrides": {}
 }

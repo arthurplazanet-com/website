@@ -1,5 +1,13 @@
 {
   "plugins": ["prettier-plugin-astro", "prettier-plugin-organize-imports"],
+  "trailingComma": "es5",
+  "semi": false,
+  "singleQuote": true,
+  "useTabs": false,
+  "quoteProps": "consistent",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "printWidth": 100,
   "overrides": [
     {
       "files": "*.astro",

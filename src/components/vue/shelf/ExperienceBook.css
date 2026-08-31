@@ -1,0 +1,39 @@
+@layer components {
+  .experience { counter-reset: shown }
+
+
+  .experience__list .y-timeline-item { counter-increment: shown }
+
+  /*
+   * YTimelineItem renders its title through YHighlightedText, which paints
+   * `color: var(--color-bg)` over `--theme-current-color`. Unresolved, that is
+   * black text on nothing. The current role keeps the gold fill; the rest are
+   * plain white.
+   */
+  .experience__list .y-timeline-title .highlighted > span {
+    padding: 0;
+    color: var(--text);
+    background: none;
+    background-image: none;
+  }
+
+  .experience__list .y-timeline-item.highlighted .y-timeline-title .highlighted > span,
+  .experience__list .y-timeline-title .highlighted.active > span {
+    padding: 0.1em 0.3em;
+    color: var(--black);
+    background: var(--primary);
+  }
+
+  .experience__list .y-timeline-description { display: block }
+
+  .shelf-root.shelf-root .experience__list h3 {
+    font-size: var(--text-lead);
+    letter-spacing: -0.02em;
+  }
+
+  .experience__list .y-timeline-item p {
+    max-inline-size: 62ch;
+    font-size: var(--text-label);
+    color: var(--shelf-g1);
+  }
+}

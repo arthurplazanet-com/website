@@ -1,0 +1,41 @@
+---
+import { Code } from "astro:components";
+import Layout from "../../layouts/Layout.astro";
+import type { Snippet } from "../../types/index.ts";
+
+export async function getStaticPaths() {
+  let snippets: Snippet[] = [];
+  try {
+    const response = await fetch(
+      `${import.meta.env.PUBLIC_API_URL}/content/snippets`,
+    );
+    const data = response.ok ? await response.json() : [];
+    snippets = Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.warn("[snippets/slug] could not load snippets:", error);
+  }
+
+  return snippets.map((snippet) => ({
+    params: { slug: snippet.slug },
+    props: { snippet },
+  }));
+}
+
+const { snippet } = Astro.props as { snippet: Snippet };
+---
+
+<Layout title={`${snippet.title} - Arthur Plazanet`}>
+  <main class="snippet">
+    <h1>{snippet.title}</h1>
+    {snippet.description && <p>{snippet.description}</p>}
+    <Code code={snippet.code} lang={snippet.language} />
+  </main>
+</Layout>
+
+<style>
+  .snippet {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+  }
+</style>

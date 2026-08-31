@@ -3,7 +3,7 @@ title: "Why I fear Tailwind in the long term or in a big project"
 description: "A deep dive into the potential long-term challenges of using Tailwind CSS in large projects."
 pubDate: 2024-06-17
 updatedDate: 2024-06-17
-slug: my
+slug: tailwind
 ---
 
 # Why I fear Tailwind in the long term or in a big project
@@ -121,7 +121,7 @@ But what if this component needs to be changed / modified in the future? This ch
 ### 1. Readability 👓
 
 - It can be hard hard to see what each tag is doing or rendering if no visual on a browser or so
-- There are a lot of `<div>` - and we _don't know at first what is doing what_, you need to read class by class to understand it, as elements are not identified (see [here](https://github.com/arthur-plazanet/thoughts/pull/1#naming-things))
+- There are a lot of `<div>` - and we _don't know at first what is doing what_, you need to read class by class to understand it, as elements are not identified (see [here](https://github.com/arthu-pr/thoughts/pull/1#naming-things))
 - `-neutral-400` or `-neutral-800` (or even with any word such `-primary-400` or `-primary-800` - even though a bit better) doesn't bring a lot of _context_
 
 ❓ Which brings the question: "Why this new language? What does it bring?"
@@ -149,7 +149,7 @@ Tailwind create utility classes that usually do one thing, based on declarative 
       - but for `align-items`, it is `items-*`
     - `font-weight` is `font-*` but `font-size` is `text-*`
     - `border-radius` is `rounded-*`
-- Maintainability is a concern, as we rely on an external tool (see [Tailwind v4](https://github.com/arthur-plazanet/thoughts/pull/1#tailwind-v4))
+- Maintainability is a concern, as we rely on an external tool (see [Tailwind v4](https://github.com/arthu-pr/thoughts/pull/1#tailwind-v4))
 
 ---
 

@@ -1,0 +1,77 @@
+@import "./layout.css";
+@import "./components/grid.css";
+/* @import './components.css'; */
+@import "./variables/index.css";
+
+html {
+  box-sizing: border-box;
+  /* font-family: 'LeagueGothic-Regular'; */
+  /* font-family: 'ChunkFive-Regular'; */
+  font-family: "Party Confetti";
+  /* font-family: 'JosefinSansRegular'; */
+  font-size: 16px;
+  color: var(--grey);
+}
+
+/* https://css-tricks.com/box-sizing/ */
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-size: var(--paragraph);
+}
+
+/* --scrollbar-foreground: #999 --scrollbar-background: #333 Foreground, Background */
+/* scrollbar-color: var(--primary) var(--black); */
+
+h1 {
+  font-family: "ChunkFive";
+  font-family: "Gotham";
+  text-transform: uppercase;
+}
+button,
+input,
+textarea,
+label {
+  font-size: inherit;
+}
+
+h2,
+h3 {
+  font-family: "Gotham";
+  letter-spacing: normal;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --mobile-width: 325px;
+  --mobile-height: 670px;
+  --mobile-radius: 25px;
+  --separator-height: 500px;
+
+  --bg: #fdf3f2;
+  --mobile-bg: #fdeae6;
+  --intro-bg: #eed7d1;
+  --font-color: #807b7b;
+
+  --transition: transform 0.7s ease-in-out;
+}

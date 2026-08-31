@@ -2,6 +2,10 @@
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"],
+  "aliases": {
+    "@": "./src",
+    "@/types": "./src/types"
+  },
   "compilerOptions": {
     "jsx": "preserve",
     "strictNullChecks": true,

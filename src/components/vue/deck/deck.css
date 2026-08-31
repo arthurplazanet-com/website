@@ -1,0 +1,146 @@
+/*
+ * The deck's own layer. Everything here rides on the tokens in
+ * assets/css/tokens.css — no literal colours except the two alpha washes
+ * that need the gold at partial opacity.
+ *
+ * Panel state is two radios and :has(), not a Vue ref: the push works before
+ * the island hydrates, and script only writes --deck-p mid-drag. Same shape
+ * @use-compose/ui's CLAUDE.md asks for — "JS sets one thin state signal,
+ * CSS owns everything downstream".
+ */
+@layer components {
+  /*
+   * These live on :root, not .deck-root: YModal teleports the drawer to
+   * <body>, so a token scoped to the deck resolves to nothing inside it —
+   * which silently turns text transparent rather than erroring.
+   */
+  :root {
+    --deck-bar: 3.25rem;
+    --deck-rail: 104px;
+    --deck-pad: clamp(1rem, 2.4vw, 2.25rem);
+    --deck-gap: 1px;
+    --deck-p: 0;
+
+    --deck-g1: rgb(254 254 254 / 62%);
+    --deck-g2: rgb(254 254 254 / 34%);
+    --deck-g3: rgb(254 254 254 / 15%);
+    --deck-g4: rgb(254 254 254 / 7%);
+    --deck-raise: #141414;
+
+    --deck-push: 620ms cubic-bezier(0.65, 0, 0.35, 1);
+    --deck-fly: 460ms cubic-bezier(0.65, 0, 0.35, 1);
+    --deck-snap: 150ms linear;
+
+  }
+
+  .deck-root {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .deck-state {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    opacity: 0;
+    appearance: none;
+  }
+
+  .deck-root:has(#deck-open:checked) {
+    --deck-p: 1;
+  }
+
+  .deck-viewport {
+    position: absolute;
+    inset: 0 0 var(--deck-bar);
+    overflow: hidden;
+  }
+
+  .deck-track {
+    display: flex;
+    width: calc(200svw - var(--deck-rail));
+    height: 100%;
+    transform: translateX(calc(var(--deck-p) * (var(--deck-rail) - 100svw)));
+    transition: transform var(--deck-push);
+    will-change: transform;
+  }
+
+  .deck-viewport[data-dragging] .deck-track {
+    transition: none;
+  }
+
+  .deck-panel {
+    position: relative;
+    height: 100%;
+    min-width: 0;
+  }
+
+  .deck-panel--id {
+    z-index: 2;
+    flex: 0 0 calc(100svw - var(--deck-rail));
+    background: var(--bg-light);
+  }
+
+  .deck-panel--records {
+    z-index: 1;
+    display: grid;
+    grid-template-columns: var(--deck-rail) minmax(0, 1fr);
+    min-height: 0;
+    background: var(--bg);
+  }
+
+  /* the identity panel twitches now and then so the edge reads as movable */
+  .deck-panel--id {
+    animation: deck-nudge 9s cubic-bezier(0.65, 0, 0.35, 1) 3s infinite;
+  }
+
+  .deck-root:has(#deck-open:checked) .deck-panel--id,
+  .deck-viewport[data-dragging] .deck-panel--id {
+    animation: none;
+  }
+
+  @keyframes deck-nudge {
+    0%,
+    88%,
+    100% { transform: translateX(0); }
+    92% { transform: translateX(-13px); }
+    96% { transform: translateX(-3px); }
+  }
+
+  .deck-lab {
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--deck-g2);
+  }
+
+  .deck-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .deck-root *,
+    .deck-root *::before,
+    .deck-root *::after {
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 1ms !important;
+    }
+  }
+}

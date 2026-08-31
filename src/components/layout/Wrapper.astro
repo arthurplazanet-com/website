@@ -1,0 +1,14 @@
+---
+// Thin wrapper around the `.wrapper` CUBE layout primitive
+// (src/assets/css/cube/layout.css) so pages don't repeat the class name.
+interface Props {
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { class: className, ...rest } = Astro.props;
+---
+
+<div class:list={["wrapper", className]} {...rest}>
+  <slot />
+</div>

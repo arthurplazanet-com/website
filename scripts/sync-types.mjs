@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
-const REPO = "arthur-plazanet/use-github-actions";
+const REPO = "arthu-pr/use-github-actions";
 const BRANCH = "dist";
 const TYPES_DIR = "src/types";
 

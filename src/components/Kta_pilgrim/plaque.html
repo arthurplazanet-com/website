@@ -1,0 +1,32 @@
+<div class="plaque"></div>
+
+<style>
+  .plaque {
+    display: inline-block;
+    position: relative;
+    border-radius: 50%;
+    width: 32px;
+    box-decoration-break: clone;
+    background-color: black;
+    border: 0.5px solid grey;
+    aspect-ratio: 1/0.3;
+  }
+
+  .plaque:before {
+    content: " ";
+    border-radius: 50%;
+    position: absolute;
+    inset: -4px -2px 0 -2px;
+    background-image: linear-gradient(
+      to right,
+      grey,
+      darkgrey,
+      lightgrey,
+      darkgrey,
+      grey /* rgba(111, 78, 55, 0.5), */ /* rgba(58, 42, 21, 0.5), */
+        /* rgba(58, 42, 21, 0.8), */ /* rgba(58, 42, 21, 1), */ /* black */
+    );
+    border: 0.7px solid grey;
+    z-index: -1;
+  }
+</style>

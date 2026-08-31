@@ -1,0 +1,24 @@
+:root {
+  --primary: #ffe97f;
+  /* Arylide yellow - https://coolors.co */
+  --primary: #e3c567;
+  --primary-50: #e3c56740;
+  /* --primary: #fbe134; */
+
+  --grey: #e9eaec;
+  --pink: rgba(255, 0, 255, 1);
+
+  /* yellow shades - https://htmlcolorcodes.com/colors/shades-of-yellow/ */
+  --pastel-yellow: rgba(255, 250, 160, 1);
+
+  /* https://picular.co/brutal%20yellow */
+  --black: #0b0c0c;
+
+  --text-color: rgb(0, 0, 0);
+
+  /* Buttons */
+  --btn-shadow: rgba(0, 0, 0, 1);
+
+  /* Dark mode */
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme */
+}
