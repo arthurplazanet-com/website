@@ -66,6 +66,7 @@ import DeckIcon from './icons/DeckIcon.vue'
 import ProjectDrawer from './ProjectDrawer.vue'
 import RecordCell from './RecordCell.vue'
 import { SECTIONS, toRecord, type DeckRecord } from './records'
+import './deck.css'
 import './RecordDeck.css'
 import type { Project } from '../../../types/index.ts'
 
