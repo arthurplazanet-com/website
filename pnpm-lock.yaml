@@ -46,14 +46,14 @@ importers:
         specifier: 4.0.3
         version: 4.0.3
       prettier:
-        specifier: 3.9.6
-        version: 3.9.6
+        specifier: 3.9.8
+        version: 3.9.8
       prettier-plugin-astro:
         specifier: 0.14.1
         version: 0.14.1
       prettier-plugin-organize-imports:
         specifier: 4.3.0
-        version: 4.3.0(prettier@3.9.6)(typescript@5.9.3)
+        version: 4.3.0(prettier@3.9.8)(typescript@5.9.3)
       rehype-raw:
         specifier: 7.0.0
         version: 7.0.0
@@ -2490,8 +2490,8 @@ packages:
       vue-tsc:
         optional: true
 
-  prettier@3.9.6:
-    resolution: {integrity: sha512-OpN0zzVdiaiAhxpuuj5efpIS4sY9j7bY6uR5mnj5yPzGkdkjNKSJeUThPb60Jw29QuAZgA4o+/iB49kFiaBX6g==}
+  prettier@3.9.8:
+    resolution: {integrity: sha512-WRFq3Wn3WId7LLROfMLdH7xaFr2jR62wU8nLO6rQUOLOxNZUviyJQs1M0iIhLexSFy+L+w0ch66wtoO2jRjG0A==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -5897,15 +5897,15 @@ snapshots:
   prettier-plugin-astro@0.14.1:
     dependencies:
       '@astrojs/compiler': 2.13.1
-      prettier: 3.9.6
+      prettier: 3.9.8
       sass-formatter: 0.7.9
 
-  prettier-plugin-organize-imports@4.3.0(prettier@3.9.6)(typescript@5.9.3):
+  prettier-plugin-organize-imports@4.3.0(prettier@3.9.8)(typescript@5.9.3):
     dependencies:
-      prettier: 3.9.6
+      prettier: 3.9.8
       typescript: 5.9.3
 
-  prettier@3.9.6: {}
+  prettier@3.9.8: {}
 
   prismjs@1.30.0: {}
 
