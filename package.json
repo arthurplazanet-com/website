@@ -16,9 +16,9 @@
   "dependencies": {
     "@nanostores/vue": "1.1.0",
     "@astrojs/mdx": "7.0.8",
-    "@astrojs/vue": "7.0.2",
+    "@astrojs/vue": "7.0.3",
     "@use-compose/ui": "1.2.0",
-    "astro": "7.3.2",
+    "astro": "7.3.3",
     "nanostores": "1.5.3",
     "vue": "catalog:"
   },
