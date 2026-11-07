@@ -1,32 +1,99 @@
+/*
+ * The panel stack: two full-bleed panels in the same box, the cover painted on
+ * top of the records. Loaded from main.css into the `components` layer — don't
+ * re-declare @layer in here, that would nest it as `components.components`.
+ *
+ * State is one pair of radios read through :has(), the same shape deck.css
+ * uses: the push works before the Vue island hydrates, and script (if any) only
+ * ever writes --panel-p mid-gesture. CSS owns everything downstream.
+ *
+ * The bar is a grid row rather than an overlay, so it is never covered by the
+ * cover and never scrolls with the records — it is the one fixed piece of
+ * chrome, and it is what makes the two panels read as two panels.
+ */
+
 .panel-wrapper {
+  --panel-bar: 3.25rem;
+
+  /* How much of the panel behind stays visible while the cover is down. The
+     whole affordance: without it the cover is just "the page". */
+  --panel-sliver: 12px;
+  --panel-push: 620ms cubic-bezier(0.65, 0, 0.35, 1);
+  --panel-p: 0;
+
+  position: relative;
+  display: grid;
+  grid-template-rows: var(--panel-bar) 1fr;
   height: 100svh;
-  height: 100%;
-  width: 100dvw;
-  width: 100%;
   overflow: hidden;
-  z-index: 0;
-  position: absolute;
-  /* display: inline-flex; */
-
-  .panel-section {
-    position: relative;
-    inset: 0;
-    --panel-width: 100dvw;
-    height: 100%;
-    max-width: var(--panel-width);
-    display: flex;
-    justify-content: center;
-    background-color: var(--color-bg);
-    /* align-items: center; */
-    z-index: 1;
-    overflow: hidden;
-    transition: width 0.3s ease-in-out;
-    /* transform: translateX(calc((100dvw - var(--panel-width)) / 2)); */
-  }
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
-.panel-wrapper .panel-section:has(svg:active) {
-  width: 90%;
-  z-index: 1;
 
-  transition: width 0.3s ease-in-out;
+/* Focusable, not display:none — the cover has to be openable from the keyboard. */
+.panel-state {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  opacity: 0;
+  appearance: none;
+}
+
+.panel-wrapper:has(#panel-open:checked) {
+  --panel-p: 1;
+}
+
+/* Row 2. The clipping box both panels are absolutely positioned inside. */
+.panel-stage {
+  position: relative;
+  overflow: hidden;
+}
+
+.panel-section {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: var(--color-bg);
+}
+
+/*
+ * Behind: the records. It only becomes scrollable once the cover is off it —
+ * while covered, a stray wheel event would scroll something nobody can see, and
+ * the scrollbar would show through the sliver.
+ */
+.panel--back {
+  z-index: 1;
+}
+
+.panel-wrapper:has(#panel-open:checked) .panel--back {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/*
+ * On top: the cover. Held short of the right edge so the panel behind shows as
+ * a sliver, with a hard shadow (no blur — this is a stack of paper, not a card)
+ * to say which one is on top.
+ */
+.panel--cover {
+  z-index: 2;
+  inset: 0 var(--panel-sliver) 0 0;
+  background-color: var(--color-info);
+  box-shadow: 14px 0 0 rgb(0 0 0 / 60%);
+  transform: translateX(calc(var(--panel-p) * -104%));
+  transition: transform var(--panel-push);
+  will-change: transform;
+}
+
+.panel-wrapper:has(#panel-open:checked) .panel--cover {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel--cover {
+    transition: none;
+  }
 }
