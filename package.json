@@ -18,7 +18,7 @@
     "@astrojs/mdx": "7.0.8",
     "@astrojs/vue": "7.1.6",
     "@use-compose/ui": "1.2.0",
-    "astro": "7.4.12",
+    "astro": "7.4.13",
     "nanostores": "1.5.5",
     "vue": "catalog:"
   },
