@@ -1,59 +1,73 @@
 <template>
-  <PanelSection style="--panel-width: 80dvw" class="info-book">
-    <KeplaIcon width="150px" />
-    <button
-      class="lamp-trigger"
-      type="button"
-      :aria-pressed="revealed"
-      aria-label="Toggle projects"
-      @click="revealed = !revealed"
-    >
+  <!--
+    The cover. It is the top of the stack, so the only thing it owes the reader
+    is a way off it — the lamp is a <label for="panel-open">, which is why there
+    is no click handler and no local `revealed` ref here any more. panel.css
+    reads the radio and does the push.
+  -->
+  <section class="panel-section panel--cover info-book" aria-label="Identity">
+    <div class="info-book__body">
+      <KeplaIcon width="150px" />
+
+      <h1 class="info-book__name">Arthur Plazanet</h1>
+      <p class="info-book__role">Software Engineer — Berlin</p>
+    </div>
+
+    <label class="lamp-trigger" for="panel-open">
       <img :src="lampImg.src" alt="" />
-    </button>
-    <!-- <div class="cs-center"> -->
-    <YScreen>
-      <SiteHeader />
-
-      <h1>Arthur nanana</h1>
-
-      <footer>
-        <p class="text-sm text-center text-muted">
-          &copy; 2024 Arthur Plazanet. All rights reserved.
-        </p>
-      </footer>
-      <!-- </div> -->
-      <!-- </div> -->
-    </YScreen>
-  </PanelSection>
+      <span class="lamp-trigger__label">Push to open</span>
+    </label>
+  </section>
 </template>
 
 <script setup lang="ts">
-import type { YTheme } from '@use-compose/ui'
-import { AppCompose, YScreen, YCenter, YWrapper, YButton } from '@use-compose/ui'
-import type { Project, Experience } from '../../../types'
-import SiteHeader from '../ui/SiteHeader.vue'
-import PanelSection from '../ui/PanelSection.vue'
 import lampImg from '../../../assets/img/lab/lamp.png'
-import { ref } from 'vue'
 import KeplaIcon from '../icons/KeplaIcon.vue'
-
-const revealed = ref(false)
 </script>
+
 <style>
-.panel-section.info-book {
-  position: absolute;
-  z-index: 2;
+.info-book {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-lg);
 }
+
+.info-book__name {
+  margin: var(--space-md) 0 0;
+  font-family: var(--font-title);
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.info-book__role {
+  margin: var(--space-xs) 0 0;
+  color: var(--muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 .lamp-trigger {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  inset-block-start: var(--space-md);
+  inset-inline-end: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxs);
+  align-items: center;
   width: 64px;
-  padding: 0;
-  border: none;
-  background: none;
   cursor: pointer;
-  opacity: 1;
-  transition: opacity 150ms linear;
+}
+
+.lamp-trigger img {
+  width: 100%;
+}
+
+.lamp-trigger__label {
+  font-size: var(--text-sm);
+  line-height: 1.1;
+  text-align: center;
+  color: var(--color-primary);
 }
 </style>
